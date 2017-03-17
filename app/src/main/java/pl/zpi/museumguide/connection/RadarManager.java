@@ -10,47 +10,52 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RadarManager
-{
-    private Listener listener;
+import pl.zpi.museumguide.data.DataPreparerRepository;
+import pl.zpi.museumguide.data.DataRepository;
+import pl.zpi.museumguide.data.domain.Beacon;
+import pl.zpi.museumguide.data.domain.Work;
 
+public class RadarManager {
+    private Listener listener;
+    private DataRepository dataRepository; //todo inject
     private BeaconManager beaconManager;
     private String scanId;
 
-    private Map<NearableID, Integer> nearablesRssi;
+    private Map<Beacon, Integer> nearablesRssi;
     List<String> labels;
 
-    public RadarManager(Context context, final Map<NearableID, Art> products)
-    {
+    public RadarManager(Context context, final Map<Beacon, Work> products) {
+        dataRepository = new DataPreparerRepository();
         beaconManager = new BeaconManager(context);
         nearablesRssi = new HashMap<>();
         beaconManager.setNearableListener(new BeaconManager.NearableListener() {
             @Override
-            public void onNearablesDiscovered(List<Nearable> list)
-            {
-                labels = new ArrayList<String>();
-                for (Nearable nearable : list)
-                {
-                    NearableID nearableID = new NearableID(nearable.identifier);
-                    if (!products.keySet().contains(nearableID)) { continue; }
+            public void onNearablesDiscovered(List<Nearable> list) {
+                labels = new ArrayList<>();
+                for (Nearable nearable : list) {
+                    Beacon beacon = dataRepository.getBeacon(nearable.identifier);
 
-                    nearablesRssi.put(nearableID, nearable.rssi);
-                    if(!labels.contains((products.get(nearableID)).toString()))
-                        labels.add((products.get(nearableID)).toString());
+                    if (!products.keySet().contains(beacon)) {
+                        continue;
+                    }
 
-                    Art product = products.get(getBest(nearablesRssi));
-                    listener.onProductPickup(product, labels);
+                    nearablesRssi.put(beacon, nearable.rssi);
+                    Work currentWork = products.get(beacon);
+                    //todo change this if to check beacon id not label
+                    if (!labels.contains(currentWork.getTitle() + "\n" + currentWork.getAuthors().get(0).getDisplayName()))
+                        labels.add(currentWork.getTitle() + "\n" + currentWork.getAuthors().get(0).getDisplayName());
+
+                    Work work = products.get(getBest(nearablesRssi));
+                    listener.onProductPickup(work, labels);
                 }
             }
         });
     }
 
-    public NearableID getBest(Map<NearableID, Integer> map)
-    {
-        Map.Entry<NearableID, Integer> best = null;
+    public Beacon getBest(Map<Beacon, Integer> map) {
+        Map.Entry<Beacon, Integer> best = null;
 
-        for (Map.Entry<NearableID, Integer> entry : map.entrySet())
-        {
+        for (Map.Entry<Beacon, Integer> entry : map.entrySet()) {
             if (best == null || entry.getValue().compareTo(best.getValue()) > 0)
                 best = entry;
         }
@@ -62,19 +67,14 @@ public class RadarManager
         this.listener = listener;
     }
 
-    public interface Listener
-    {
-        void onProductPickup(Art product, List<String> allStickers);
-        void onProductPutdown(Art product);
+    public interface Listener {
+        void onProductPickup(Work work, List<String> allStickers);
+
+        void onProductPutdown(Work work);
     }
 
     public void startUpdates() {
-        beaconManager.connect(new BeaconManager.ServiceReadyCallback() {
-            @Override
-            public void onServiceReady() {
-                scanId = beaconManager.startNearableDiscovery();
-            }
-        });
+        beaconManager.connect(() -> scanId = beaconManager.startNearableDiscovery());
     }
 
     public void stopUpdates() {
