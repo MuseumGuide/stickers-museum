@@ -1,4 +1,4 @@
-package com.museum;
+package pl.zpi.museumguide;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +9,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.estimote.sdk.SystemRequirementsChecker;
-import com.museum.connection.*;
+import pl.zpi.museumguide.connection.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

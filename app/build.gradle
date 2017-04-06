@@ -41,4 +41,7 @@ dependencies {
 
     //Tests
     testCompile 'junit:junit:4.12'
+
+    //Estimote
+    compile 'com.estimote:sdk:0.15.+@aar'
 }

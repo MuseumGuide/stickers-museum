@@ -1,4 +1,4 @@
-package com.museum;
+package pl.zpi.museumguide;
 
 import android.app.Application;
 
