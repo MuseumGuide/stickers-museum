@@ -17,7 +17,7 @@ import pl.zpi.museumguide.data.domain.Work;
 
 public class RadarManager {
     private Listener listener;
-    private DataRepository dataRepository; //todo inject
+    private DataRepository dataRepository;
     private BeaconManager beaconManager;
     private String scanId;
 

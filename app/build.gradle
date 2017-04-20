@@ -5,7 +5,7 @@ android {
     buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "pl.zpi.museumguide"
-        minSdkVersion 19
+        minSdkVersion minSdk
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -24,8 +24,8 @@ android {
         abortOnError false
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
     }
 }
 
@@ -53,8 +53,8 @@ dependencies {
     compile 'com.estimote:sdk:0.16.+@aar'
 
     //Dagger
-    compile 'com.squareup.dagger:dagger:1.2.5'
-    compile 'com.squareup.dagger:dagger-compiler:1.2.5'
+//    compile 'com.squareup.dagger:dagger:1.2.5'
+//    compile 'com.squareup.dagger:dagger-compiler:1.2.5'
 
     //Tests
     testCompile 'junit:junit:4.12'

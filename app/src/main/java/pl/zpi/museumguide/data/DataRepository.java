@@ -4,7 +4,6 @@ package pl.zpi.museumguide.data;
  * Created by Jakub Liczneski on 18.03.2017.
  */
 
-import java.util.Collection;
 import java.util.List;
 
 import pl.zpi.museumguide.data.domain.Beacon;

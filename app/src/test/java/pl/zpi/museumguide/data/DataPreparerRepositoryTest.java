@@ -3,6 +3,7 @@ package pl.zpi.museumguide.data;
 import org.junit.Before;
 import org.junit.Test;
 
+
 import pl.zpi.museumguide.data.domain.Work;
 
 import static junit.framework.Assert.assertTrue;

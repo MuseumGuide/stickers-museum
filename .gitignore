@@ -9,3 +9,4 @@ src/main/res/drawable/
 /.idea/
 /build/
 /app/build
+*.log
