@@ -34,6 +34,9 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:design:25.3.1'
 
     //RxJava
 //    compile 'io.reactivex:rxandroid:1.2.0'
@@ -45,36 +48,16 @@ dependencies {
 //    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
 
     //ButterKnife
-
-
-    //Retrofit
-
-    //ButterKnife
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 
     //Estimote SDK
-
-    //Dagger
-
-    //Tests
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'io.reactivex:rxandroid:1.2.0'
-    compile 'io.reactivex:rxjava:1.1.4'
-    compile 'com.google.code.gson:gson:2.7'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.jakewharton:butterknife:8.5.1'
-    compile 'com.android.support:design:25.0.0'
+    compile 'com.estimote:sdk:0.16.+@aar'
 
     //Dagger
 //    compile 'com.squareup.dagger:dagger:1.2.5'
 //    compile 'com.squareup.dagger:dagger-compiler:1.2.5'
 
-    compile 'com.estimote:sdk:0.16.+@aar'
-
     //Tests
-    compile 'com.squareup.dagger:dagger:1.2.5'
-    compile 'com.squareup.dagger:dagger-compiler:1.2.5'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 }
