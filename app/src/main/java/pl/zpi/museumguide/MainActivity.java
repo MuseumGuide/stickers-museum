@@ -2,15 +2,22 @@ package pl.zpi.museumguide;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.estimote.sdk.SystemRequirementsChecker;
 
+import butterknife.BindDrawable;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import pl.zpi.museumguide.connection.*;
 import pl.zpi.museumguide.data.DataPreparerRepository;
 import pl.zpi.museumguide.data.DataRepository;
@@ -27,15 +34,21 @@ public class MainActivity extends AppCompatActivity {
     private DataRepository dataRepository; //todo inject
     private RadarManager radarManager;
     private ArrayAdapter<String> arrayAdapter;
-    private ListView lv;
+
+    @BindView(R.id.titleLabel)
+    TextView titleLabel;
+    @BindView(R.id.authorLabel)
+    TextView authorLabel;
+    @BindView(R.id.list)
+    ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dataRepository = new DataPreparerRepository();
-
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
+        dataRepository = new DataPreparerRepository();
         Map<Beacon, Work> products = new HashMap<>();
 
         //todo get from repository
@@ -49,21 +62,20 @@ public class MainActivity extends AppCompatActivity {
         radarManager.setListener(new RadarManager.Listener() {
             @Override
             public void onProductPickup(Work work, List<String> allStickers) {
-                ((TextView) findViewById(R.id.titleLabel)).setText(work.getTitle());
+                titleLabel.setText(work.getTitle());
                 //todo display all authors
-                ((TextView) findViewById(R.id.authorLabel)).setText(work.getAuthors().get(0).getDisplayName());
-                lv = (ListView) findViewById(R.id.lista);
+                authorLabel.setText(work.getAuthors().get(0).getDisplayName());
 
                 arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, allStickers);
 
-                lv.setAdapter(arrayAdapter);
-                findViewById(R.id.authorLabel).setVisibility(View.VISIBLE);
+                list.setAdapter(arrayAdapter);
+                authorLabel.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onProductPutdown(Work work) {
-                ((TextView) findViewById(R.id.titleLabel)).setText("SZUKA SZUKA");
-                findViewById(R.id.authorLabel).setVisibility(View.INVISIBLE);
+                titleLabel.setText("SZUKA SZUKA");
+                authorLabel.setVisibility(View.INVISIBLE);
             }
         });
 
