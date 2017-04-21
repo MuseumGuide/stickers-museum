@@ -63,6 +63,7 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.jakewharton:butterknife:8.5.1'
+    compile 'com.android.support:design:25.0.0'
 
     //Dagger
 //    compile 'com.squareup.dagger:dagger:1.2.5'

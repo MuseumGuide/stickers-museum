@@ -2,6 +2,7 @@ package pl.zpi.museumguide;
 
 import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -76,6 +77,7 @@ public class Room extends AppCompatActivity
         products.put(b1, b1.getWork().get(0));
         products.put(b2, b2.getWork().get(0));
         radarManager = new RadarManager(this, products);
+        String idLastSticker = "";
 
         radarManager.setListener(new RadarManager.Listener() {
             @Override
@@ -88,14 +90,23 @@ public class Room extends AppCompatActivity
 
                 ImageView near = pointsOnMap.get(String.valueOf(work.getBeacon().getUuid()));
                 near.setImageResource(R.drawable.sticker_hover);
+
+                showNotice(work);
             }
 
             @Override
-            public void onProductPutdown(Work work) {
-                ((TextView) findViewById(R.id.titleLabel)).setText("SZUKA SZUKA");
-                findViewById(R.id.authorLabel).setVisibility(View.INVISIBLE);
+            public void onProductPutdown(Work work)
+            {
+                sticker1.setImageResource(R.drawable.sticker);
+                sticker2.setImageResource(R.drawable.sticker);
             }
         });
+    }
+
+    public void showNotice(Work work)
+    {
+        Snackbar noticeNearSticker = Snackbar.make(findViewById(android.R.id.content), work.getTitle(), Snackbar.LENGTH_INDEFINITE);
+        noticeNearSticker.show();
     }
 
     @Override
