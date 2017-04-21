@@ -2,8 +2,73 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_room"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="pl.zpi.museumguide.data.Room">
+    tools:context="pl.zpi.museumguide.Room">
+
+    <FrameLayout
+        android:id="@+id/background_room"
+        android:layout_width="301dp"
+        android:layout_height="353dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/sticker_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignTop="@+id/sticker_2"
+                android:layout_marginStart="29dp"
+                app:srcCompat="@drawable/sticker" />
+
+            <ImageView
+                android:id="@+id/sticker_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="69dp"
+                android:layout_marginTop="25dp"
+                app:srcCompat="@drawable/sticker" />
+
+            <ImageView
+                android:id="@+id/sticker_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/sticker_2"
+                android:layout_marginBottom="52dp"
+                android:layout_marginStart="34dp"
+                app:srcCompat="@drawable/sticker" />
+
+            <ImageView
+                android:id="@+id/sticker_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/sticker_3"
+                android:layout_alignStart="@+id/sticker_3"
+                android:layout_marginBottom="108dp"
+                app:srcCompat="@drawable/sticker" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/temp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="31dp" />
 
 </android.support.constraint.ConstraintLayout>

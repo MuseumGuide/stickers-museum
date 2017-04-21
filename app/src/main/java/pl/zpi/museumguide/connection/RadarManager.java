@@ -24,7 +24,8 @@ public class RadarManager {
     private Map<Beacon, Integer> nearablesRssi;
     List<String> labels;
 
-    public RadarManager(Context context, final Map<Beacon, Work> products) {
+    public RadarManager(Context context, final Map<Beacon, Work> products)
+    {
         dataRepository = new DataPreparerRepository();
         beaconManager = new BeaconManager(context);
         nearablesRssi = new HashMap<>();
