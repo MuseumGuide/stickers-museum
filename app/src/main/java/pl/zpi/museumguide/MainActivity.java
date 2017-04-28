@@ -2,10 +2,14 @@ package pl.zpi.museumguide;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -41,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
     TextView authorLabel;
     @BindView(R.id.list)
     ListView list;
+
+    private Toolbar mToolbar;
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +88,33 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+//        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(mToolbar);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.relativeLayout);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.Close);
+
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+
+
+
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+//        if(mToggle.onOptionsItemSelected(item)){
+//            return true;
+//        }
+
+       // return super.onOptionsItemSelected(item);
+        return mToggle.onOptionsItemSelected(item);
+    }
+
+
 
     public void goToMap(View v)
     {

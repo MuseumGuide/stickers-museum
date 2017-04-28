@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Museum Guide</string>
+    <string name="open">Open</string>
+    <string name="Close">Close</string>
     <string name="title_activity_tab_test">TabTestActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
