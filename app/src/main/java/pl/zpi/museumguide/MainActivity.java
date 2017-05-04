@@ -9,6 +9,7 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -106,17 +107,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-//        if(mToggle.onOptionsItemSelected(item)){
-//            return true;
-//        }
-
-       // return super.onOptionsItemSelected(item);
         return mToggle.onOptionsItemSelected(item);
+
     }
 
+    
 
 
-    public void goToMap(View v)
+     public void goToMap(View v)
     {
         Intent intent = new Intent(getApplicationContext(), Room.class);
         startActivity(intent);
