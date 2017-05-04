@@ -34,9 +34,7 @@ public class Room extends AppCompatActivity
 
     private DataRepository dataRepository;
     private RadarManager radarManager;
-    private ArrayAdapter<String> arrayAdapter;
     private Map<String, ImageView> pointsOnMap;
-    private ListView lv;
     private ImageView sticker1;
     private ImageView sticker2;
     private ImageView sticker3;
@@ -50,9 +48,6 @@ public class Room extends AppCompatActivity
         setContentView(R.layout.activity_room);
 
         background = (RelativeLayout) findViewById(R.id.map);
-
-        ((FrameLayout) findViewById(R.id.background_room)).setBackgroundColor(Color.parseColor("#e1e1e1"));
-        ((ConstraintLayout) findViewById(R.id.main_room)).setBackgroundColor(Color.parseColor("#e1e1e1"));
 
         background.setBackgroundResource(R.drawable.mapa);
 
@@ -77,7 +72,6 @@ public class Room extends AppCompatActivity
         products.put(b1, b1.getWork().get(0));
         products.put(b2, b2.getWork().get(0));
         radarManager = new RadarManager(this, products);
-        String idLastSticker = "";
 
         radarManager.setListener(new RadarManager.Listener() {
             @Override
@@ -90,8 +84,6 @@ public class Room extends AppCompatActivity
 
                 ImageView near = pointsOnMap.get(String.valueOf(work.getBeacon().getUuid()));
                 near.setImageResource(R.drawable.sticker_hover);
-
-                showNotice(work);
             }
 
             @Override
@@ -101,12 +93,6 @@ public class Room extends AppCompatActivity
                 sticker2.setImageResource(R.drawable.sticker);
             }
         });
-    }
-
-    public void showNotice(Work work)
-    {
-        Snackbar noticeNearSticker = Snackbar.make(findViewById(android.R.id.content), work.getTitle(), Snackbar.LENGTH_INDEFINITE);
-        noticeNearSticker.show();
     }
 
     @Override
