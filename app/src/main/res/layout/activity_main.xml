@@ -48,6 +48,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="19dp"
         android:onClick="goToMap"
-        android:text="Button" />
+        android:text="Mapa" />
 
 </RelativeLayout>
