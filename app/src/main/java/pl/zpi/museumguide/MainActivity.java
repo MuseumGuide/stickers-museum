@@ -2,16 +2,24 @@ package pl.zpi.museumguide;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.estimote.sdk.SystemRequirementsChecker;
 
@@ -41,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
     TextView authorLabel;
     @BindView(R.id.list)
     ListView list;
+
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +90,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.relativeLayout);
+        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.Close);
+
+        mDrawerLayout.addDrawerListener(mToggle);
+        mToggle.syncState();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
-    public void goToMap(View v)
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        return mToggle.onOptionsItemSelected(item);
+
+    }
+
+
+     public void goToMap(View v)
     {
         Intent intent = new Intent(getApplicationContext(), Room.class);
         startActivity(intent);
