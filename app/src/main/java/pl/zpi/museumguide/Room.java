@@ -1,14 +1,15 @@
 package pl.zpi.museumguide;
 
 import android.graphics.Color;
-import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -16,14 +17,15 @@ import android.widget.TextView;
 
 import com.estimote.sdk.SystemRequirementsChecker;
 
-import pl.zpi.museumguide.data.DataPreparerRepository;
-import pl.zpi.museumguide.data.DataRepository;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import pl.zpi.museumguide.bottomsheet.SectionsPagerAdapter;
 import pl.zpi.museumguide.connection.RadarManager;
+import pl.zpi.museumguide.data.DataPreparerRepository;
+import pl.zpi.museumguide.data.DataRepository;
+import pl.zpi.museumguide.data.domain.Author;
 import pl.zpi.museumguide.data.domain.Beacon;
 import pl.zpi.museumguide.data.domain.Work;
 
@@ -43,6 +45,11 @@ public class Room extends AppCompatActivity
     private ImageView sticker4;
     private RelativeLayout background;
 
+
+    private ViewPager mViewPager;
+    private TabLayout tabLayout;
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -51,8 +58,8 @@ public class Room extends AppCompatActivity
 
         background = (RelativeLayout) findViewById(R.id.map);
 
-        ((FrameLayout) findViewById(R.id.background_room)).setBackgroundColor(Color.parseColor("#e1e1e1"));
-        ((ConstraintLayout) findViewById(R.id.main_room)).setBackgroundColor(Color.parseColor("#e1e1e1"));
+        findViewById(R.id.background_room).setBackgroundColor(Color.parseColor("#e1e1e1"));
+        findViewById(R.id.main_room).setBackgroundColor(Color.parseColor("#e1e1e1"));
 
         background.setBackgroundResource(R.drawable.mapa);
 
@@ -66,12 +73,12 @@ public class Room extends AppCompatActivity
         Map<Beacon, Work> products = new HashMap<>();
 
         //todo get from repository
-        Beacon b1 = dataRepository.getBeacon("9d52d31fa9e0f214");
-        Beacon b2 = dataRepository.getBeacon("c0e0ce88435105aa");
+        Beacon b1 = dataRepository.getBeacon(DataPreparerRepository.beacon1UUID);
+        Beacon b2 = dataRepository.getBeacon(DataPreparerRepository.beacon2UUID);
 
-        pointsOnMap = new HashMap<String, ImageView>();
-        pointsOnMap.put("9d52d31fa9e0f214", sticker1);
-        pointsOnMap.put("c0e0ce88435105aa", sticker2);
+        pointsOnMap = new HashMap<>();
+        pointsOnMap.put(DataPreparerRepository.beacon1UUID, sticker1);
+        pointsOnMap.put(DataPreparerRepository.beacon2UUID, sticker2);
 
         //todo resolve many works on one beacon
         products.put(b1, b1.getWork().get(0));
@@ -83,8 +90,6 @@ public class Room extends AppCompatActivity
             @Override
             public void onProductPickup(Work work, List<String> allStickers)
             {
-                ((TextView) findViewById(R.id.temp)).setText(work.getTitle());
-
                 sticker1.setImageResource(R.drawable.sticker);
                 sticker2.setImageResource(R.drawable.sticker);
 
@@ -101,12 +106,68 @@ public class Room extends AppCompatActivity
                 sticker2.setImageResource(R.drawable.sticker);
             }
         });
+        prepareTabLayout();
+    }
+
+    private void prepareTabLayout()
+    {
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+        mViewPager.setOffscreenPageLimit(3);
+        tabLayout.setupWithViewPager(mViewPager);
     }
 
     public void showNotice(Work work)
     {
-        Snackbar noticeNearSticker = Snackbar.make(findViewById(android.R.id.content), work.getTitle(), Snackbar.LENGTH_INDEFINITE);
-        noticeNearSticker.show();
+        View bottomSheet = findViewById(R.id.design_bottom_sheet);
+
+        final BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+        if(behavior.getState() == BottomSheetBehavior.STATE_HIDDEN)
+            behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        if(behavior.getState() == BottomSheetBehavior.STATE_COLLAPSED)
+        {
+            TextView title = (TextView) findViewById(R.id.MapWorkTitle);
+            title.setText(work.getTitle());
+            setWorkInfoFragment(work);
+            setAuthorInfoFragment(work);
+            setGalleryFragment(work);
+        }
+    }
+
+    private void setGalleryFragment(Work work)
+    {
+        //// TODO: 2017-05-05 Fill gallery titles
+    }
+
+    private void setAuthorInfoFragment(Work work)
+    {
+        TextView authorName = (TextView) findViewById(R.id.authorNameFrag);
+        Author author = work.getAuthors().get(0);
+        authorName.setText(author.getFirstname() + " " + author.getLastname());
+
+
+        ImageView authorImage = (ImageView) findViewById(R.id.authorImageFrag);
+        //// TODO: 2017-05-04 implement Author image field
+        authorImage.setImageResource(R.drawable.logo);
+
+
+        TextView authorInfo = (TextView) findViewById(R.id.authorInfoFrag);
+        //// TODO: 2017-05-04 implement Author info field (String?)
+        authorInfo.setText("Author Info");
+    }
+
+    private void setWorkInfoFragment(Work work)
+    {
+        TextView description = (TextView) findViewById(R.id.workDescriptionFragment);
+        description.setText(work.getInformation().get(0).getText());
+
+        ImageView workImage = (ImageView) findViewById(R.id.workImageFrag);
+        //// TODO: 2017-05-04 implement Work image field
+        workImage.setImageResource(android.R.drawable.sym_def_app_icon);
     }
 
     @Override
