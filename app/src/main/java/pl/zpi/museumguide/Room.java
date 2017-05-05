@@ -57,10 +57,6 @@ public class Room extends AppCompatActivity
         setContentView(R.layout.activity_room);
 
         background = (RelativeLayout) findViewById(R.id.map);
-
-        findViewById(R.id.background_room).setBackgroundColor(Color.parseColor("#e1e1e1"));
-        findViewById(R.id.main_room).setBackgroundColor(Color.parseColor("#e1e1e1"));
-
         background.setBackgroundResource(R.drawable.mapa);
 
         sticker1 = (ImageView) findViewById(R.id.sticker_1);
