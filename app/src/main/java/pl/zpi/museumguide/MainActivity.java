@@ -52,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
         Map<Beacon, Work> products = new HashMap<>();
 
         //todo get from repository
-        Beacon b1 = dataRepository.getBeacon("9d52d31fa9e0f214");
-        Beacon b2 = dataRepository.getBeacon("c0e0ce88435105aa");
+        Beacon b1 = dataRepository.getBeacon(DataPreparerRepository.beacon1UUID);
+        Beacon b2 = dataRepository.getBeacon(DataPreparerRepository.beacon2UUID);
         //todo resolve many works on one beacon
         products.put(b1, b1.getWork().get(0));
         products.put(b2, b2.getWork().get(0));

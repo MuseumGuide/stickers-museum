@@ -1,7 +1,6 @@
 package pl.zpi.museumguide.data;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,6 +22,18 @@ public class DataPreparerRepository implements DataRepository {
 
     List<Work> works;
     List<Beacon> beacons;
+
+     /**
+     * UUID Mario 1
+     */
+    public static final String beacon1UUID = "4810b7186752df3a";
+    // UUID Mati 1 "9d52d31fa9e0f214"
+
+    /**
+     * UUID Mario 2
+     */
+    public static final String beacon2UUID = "3804f0fbfdafcc37";
+    // UUID Mati 2 "c0e0ce88435105aa"
 
     public DataPreparerRepository() {
         works = new ArrayList<>();
@@ -67,10 +78,11 @@ public class DataPreparerRepository implements DataRepository {
         m2.setType(MaterialType.PAINT);
 
         Beacon b1 = new Beacon();
-        b1.setUuid("9d52d31fa9e0f214");
+        b1.setUuid(beacon1UUID);
 
         Beacon b2 = new Beacon();
-        b2.setUuid("c0e0ce88435105aa");
+        b2.setUuid(beacon2UUID);
+
 
         Work w1 = new Work();
         w1.setTitle("Zimowy pejzaż z łyżwiarzami i pułapką na ptaki");
