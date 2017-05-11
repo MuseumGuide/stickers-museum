@@ -18,10 +18,11 @@ public class GalleryFrag extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.author_gallery, container, false);
-        GridView gridview = (GridView) v.findViewById(R.id.gridView);
+        View view = inflater.inflate(R.layout.author_gallery, container, false);
+        view.getContext().setTheme(R.style.BottomSheetTheme);
+        GridView gridview = (GridView) view.findViewById(R.id.gridView);
         gridview.setAdapter(new ImageAdapter(getContext()));
-        return v;
+        return view;
     }
 }
 

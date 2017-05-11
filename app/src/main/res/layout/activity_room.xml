@@ -132,7 +132,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="15dp"
                 android:textAlignment="center"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textColor="@color/colorPrimaryDark"/>
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
