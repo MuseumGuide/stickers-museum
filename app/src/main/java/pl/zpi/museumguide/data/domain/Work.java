@@ -10,6 +10,7 @@ public class Work {
 	private List<Context> information;
 	private List<Material> materials;
 	private Beacon beacon;
+	private int id_drawable;
 
 	public Work() {
 	}
@@ -63,6 +64,12 @@ public class Work {
 	public void setMaterials(List<Material> materials) {
 		this.materials = materials;
 	}
+
+	public int getIdDrawable() {
+		return id_drawable;
+	}
+
+	public void setIdDrawable(int id_drawable) {this.id_drawable = id_drawable;}
 
 	public Beacon getBeacon() {
 		return beacon;

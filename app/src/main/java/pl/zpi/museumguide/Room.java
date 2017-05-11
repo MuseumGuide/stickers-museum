@@ -80,7 +80,6 @@ public class Room extends AppCompatActivity
         products.put(b1, b1.getWork().get(0));
         products.put(b2, b2.getWork().get(0));
         radarManager = new RadarManager(this, products);
-        String idLastSticker = "";
 
         radarManager.setListener(new RadarManager.Listener() {
             @Override
@@ -163,7 +162,8 @@ public class Room extends AppCompatActivity
 
         ImageView workImage = (ImageView) findViewById(R.id.workImageFrag);
         //// TODO: 2017-05-04 implement Work image field
-        workImage.setImageResource(android.R.drawable.sym_def_app_icon);
+
+        workImage.setImageResource(work.getIdDrawable());
     }
 
     @Override
