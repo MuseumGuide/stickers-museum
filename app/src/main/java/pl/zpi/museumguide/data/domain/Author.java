@@ -8,6 +8,7 @@ public class Author {
 	private String lastname;
 	private String alias;
 	private Collection<Work> works;
+	private int id_drawable;
 
 	public Author() {
 	}
@@ -50,6 +51,10 @@ public class Author {
 	public void setWorks(Collection<Work> works) {
 		this.works = works;
 	}
+
+	public int getIdDrawable() { return id_drawable; }
+
+	public void setIdDrawable(int id_drawable) { this.id_drawable = id_drawable; }
 
 	public void addWork(Work work) {
 		if (works == null)

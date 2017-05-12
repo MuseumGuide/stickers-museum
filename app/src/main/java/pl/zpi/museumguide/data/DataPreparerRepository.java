@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import pl.zpi.museumguide.R;
 import pl.zpi.museumguide.data.domain.Author;
 import pl.zpi.museumguide.data.domain.Beacon;
 import pl.zpi.museumguide.data.domain.Context;
@@ -26,7 +27,7 @@ public class DataPreparerRepository implements DataRepository {
      /**
      * UUID Mario 1
      */
-    public static final String beacon1UUID = "04fa06a3e84db44d";
+    public static final String beacon1UUID = "9d52d31fa9e0f214";
     // UUID Mati 1 "9d52d31fa9e0f214"
     // UUID Mario 1 "4810b7186752df3a"
     // UUID Bed "04fa06a3e84db44d"
@@ -35,7 +36,7 @@ public class DataPreparerRepository implements DataRepository {
     /**
      * UUID Mario 2
      */
-    public static final String beacon2UUID = "3b3101cd591facae";
+    public static final String beacon2UUID = "c0e0ce88435105aa";
     // UUID Mati 2 "c0e0ce88435105aa"
     // UUID Mario 2 "3804f0fbfdafcc37"
     // UUID Door_blue "3b3101cd591facae"
@@ -55,12 +56,13 @@ public class DataPreparerRepository implements DataRepository {
         a1.setAlias("młodszy");
         a1.setFirstname("Pieter");
         a1.setLastname("Brueghel");
+        a1.setIdDrawable(R.drawable.pieterbrueghel);
 
         Context c1 = new Context();
         c1.setName("Barok");
         c1.setPeriod(p1);
         c1.setType(ContextType.HISTORIC);
-        c1.setText("główny kierunek w kulturze europejskiej, którego trwanie datuje się od końca XVI wieku do XVIII wieku[1]. Nieoficjalny styl Kościoła katolickiego czasów potrydenckich, stąd pojawiające się jeszcze w połowie XX wieku zamienne określenia: „sztuka jezuicka” czy „sztuka kontrreformacyjna”[2]. W odróżnieniu od humanizmu antropocentrycznego doby renesansu, barok reprezentował teocentryczny mistycyzm. W znaczeniu węższym, barok to jeden z nurtów literackich XVII wieku, koegzystujący z klasycyzmem i manieryzmem; od niego XX-wieczni badacze wyprowadzili jednak nazwę dla całej epoki. Barok obejmował wszystkie przejawy działalności literackiej i artystycznej. U jego podstaw leżało twórcze przekształcenie renesansowego klasycyzmu w dążeniu do uzyskania maksymalnego oddziaływania na odbiorcę[1]. Barok jest pojęciem bogatszym od manieryzmu, przede wszystkim dlatego, że konotuje nie tylko sam styl, ale jak dowodzą niektórzy badacze również procesy historyczne, spory filozoficzne i teologiczne oraz nastroje społeczne[3]. Bogaty w zdobnictwo, pomysłowe rozwiązania i symbolikę styl architektoniczny, malarski i literacki baroku z założenia opierał się na ignacjańskiej zasadzie applicatio sensuum, polegającej na wykorzystaniu ludzkiej zmysłowości i erotyki do przekazania treści religijnych (stąd figury świętych w ekstazie czy wyrazy oblubieńczych uczuć, skierowanych do Chrystusa).");
+        c1.setText("Główny kierunek w kulturze europejskiej, którego trwanie datuje się od końca XVI wieku do XVIII wieku[1]. Nieoficjalny styl Kościoła katolickiego czasów potrydenckich, stąd pojawiające się jeszcze w połowie XX wieku zamienne określenia: „sztuka jezuicka” czy „sztuka kontrreformacyjna”[2]. W odróżnieniu od humanizmu antropocentrycznego doby renesansu, barok reprezentował teocentryczny mistycyzm. W znaczeniu węższym, barok to jeden z nurtów literackich XVII wieku, koegzystujący z klasycyzmem i manieryzmem; od niego XX-wieczni badacze wyprowadzili jednak nazwę dla całej epoki. Barok obejmował wszystkie przejawy działalności literackiej i artystycznej. U jego podstaw leżało twórcze przekształcenie renesansowego klasycyzmu w dążeniu do uzyskania maksymalnego oddziaływania na odbiorcę[1]. Barok jest pojęciem bogatszym od manieryzmu, przede wszystkim dlatego, że konotuje nie tylko sam styl, ale jak dowodzą niektórzy badacze również procesy historyczne, spory filozoficzne i teologiczne oraz nastroje społeczne[3]. Bogaty w zdobnictwo, pomysłowe rozwiązania i symbolikę styl architektoniczny, malarski i literacki baroku z założenia opierał się na ignacjańskiej zasadzie applicatio sensuum, polegającej na wykorzystaniu ludzkiej zmysłowości i erotyki do przekazania treści religijnych (stąd figury świętych w ekstazie czy wyrazy oblubieńczych uczuć, skierowanych do Chrystusa).");
 
         Context c2 = new Context();
         c2.setName("Zimowy pejzaż z łyżwiarzami i pułapką na ptaki");
@@ -98,6 +100,7 @@ public class DataPreparerRepository implements DataRepository {
         w1.setType(WorkType.PAINTING);
         w1.setBeacon(b1);
         w1.addAuthor(a1);
+        w1.setIdDrawable(R.drawable.zimowy);
 
         b1.addWork(w1);
         a1.addWork(w1);
@@ -111,6 +114,7 @@ public class DataPreparerRepository implements DataRepository {
         w2.setType(WorkType.PAINTING);
         w2.setBeacon(b2);
         w2.addAuthor(a1);
+        w2.setIdDrawable(R.drawable.glowa);
 
         b2.addWork(w2);
         a1.addWork(w2);
