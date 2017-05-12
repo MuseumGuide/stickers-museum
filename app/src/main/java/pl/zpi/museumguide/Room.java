@@ -28,6 +28,7 @@ import pl.zpi.museumguide.data.DataRepository;
 import pl.zpi.museumguide.data.domain.Author;
 import pl.zpi.museumguide.data.domain.Beacon;
 import pl.zpi.museumguide.data.domain.Work;
+import uk.co.senab.photoview.PhotoViewAttacher;
 
 public class Room extends AppCompatActivity
 {
@@ -147,12 +148,18 @@ public class Room extends AppCompatActivity
 
         ImageView authorImage = (ImageView) findViewById(R.id.authorImageFrag);
         //// TODO: 2017-05-04 implement Author image field
-        authorImage.setImageResource(R.drawable.logo);
+        authorImage.setImageResource(work.getAuthors().get(0).getIdDrawable());
 
 
-        TextView authorInfo = (TextView) findViewById(R.id.authorInfoFrag);
+        TextView authorWorks = (TextView) findViewById(R.id.authorWorks);
         //// TODO: 2017-05-04 implement Author info field (String?)
-        authorInfo.setText("Author Info");
+
+        String out_authorWorks = "";
+
+        for(Work obj : work.getAuthors().get(0).getWorks())
+            out_authorWorks += "-  " + obj.getTitle() + "\n";
+
+        authorWorks.setText(out_authorWorks);
     }
 
     private void setWorkInfoFragment(Work work)
@@ -160,10 +167,15 @@ public class Room extends AppCompatActivity
         TextView description = (TextView) findViewById(R.id.workDescriptionFragment);
         description.setText(work.getInformation().get(0).getText());
 
+        description.setTextColor(getResources().getColor(R.color.colorLight));
+        //// TODO: 2017-05-11 set same color of text in all fragments
+
         ImageView workImage = (ImageView) findViewById(R.id.workImageFrag);
         //// TODO: 2017-05-04 implement Work image field
 
         workImage.setImageResource(work.getIdDrawable());
+
+        PhotoViewAttacher photoAttacher = new PhotoViewAttacher(workImage);
     }
 
     @Override

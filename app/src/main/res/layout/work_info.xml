@@ -16,23 +16,26 @@
             android:id="@+id/workImageFrag"
             android:layout_width="match_parent"
             android:layout_height="300dp"
-            android:layout_marginTop="5dp"
-            app:srcCompat="@android:drawable/sym_def_app_icon"
+            android:layout_marginTop="20dp"
+            app:srcCompat="@drawable/logo"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true" />
 
 
-        <TextView
-            android:id="@+id/workDescriptionFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/workImageFrag"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="15dp"
-            android:text="TextView"
-            android:textAlignment="viewStart" />
+            <TextView
+                android:id="@+id/workDescriptionFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/workImageFrag"
+                android:lineSpacingExtra="4dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                android:text="TextView"
+                android:textAlignment="viewStart"
+                android:textSize="13sp" />
 
         </RelativeLayout>
 
