@@ -50,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.list)
     ListView list;
 
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mToggle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,22 +89,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.relativeLayout);
-        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.Close);
-
-        mDrawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        return mToggle.onOptionsItemSelected(item);
-
-    }
-
 
      public void goToMap(View v)
     {
