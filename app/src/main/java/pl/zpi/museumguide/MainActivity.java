@@ -2,31 +2,26 @@ package pl.zpi.museumguide;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.estimote.sdk.SystemRequirementsChecker;
 
-import butterknife.BindDrawable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import pl.zpi.museumguide.connection.*;
+import pl.zpi.museumguide.connection.RadarManager;
 import pl.zpi.museumguide.data.DataPreparerRepository;
 import pl.zpi.museumguide.data.DataRepository;
 import pl.zpi.museumguide.data.domain.Beacon;
 import pl.zpi.museumguide.data.domain.Work;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -64,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             public void onProductPickup(Work work, List<String> allStickers) {
                 titleLabel.setText(work.getTitle());
                 //todo display all authors
-                authorLabel.setText(work.getAuthors().get(0).getDisplayName());
+                authorLabel.setText(work.getAuthor().getDisplayName());
 
                 arrayAdapter = new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, allStickers);
 
