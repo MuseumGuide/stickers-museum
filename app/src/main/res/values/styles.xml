@@ -9,6 +9,10 @@
         <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="RoomTheme" parent="AppTheme">
+        <item name="android:windowBackground">@color/colorAccentLight</item>
+    </style>
+
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
         <item name="android:windowBackground">@drawable/background_splash</item>
     </style>
