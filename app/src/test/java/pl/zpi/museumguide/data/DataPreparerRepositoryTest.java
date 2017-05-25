@@ -1,6 +1,7 @@
 package pl.zpi.museumguide.data;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 
@@ -17,16 +18,19 @@ public class DataPreparerRepositoryTest {
     //todo test dependency injection here
     DataRepository repository;
 
+    @Ignore
     @Before
     public void init() {
         repository = new DataPreparerRepository();
     }
 
+    @Ignore
     @Test
     public void getAllWorksTest() {
         assertTrue(repository.getAllWorks().size() == 2);
     }
 
+    @Ignore
     @Test
     public void getBeaconWorks() {
         assertTrue(repository.getBeaconWork("9d52d31fa9e0f214").size() == 1);
