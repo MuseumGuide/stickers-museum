@@ -62,7 +62,7 @@ public class Room extends AppCompatActivity
         setContentView(R.layout.activity_room);
 
         background = (RelativeLayout) findViewById(R.id.map);
-        background.setBackgroundResource(R.drawable.mapa);
+        background.setBackgroundResource(R.drawable.gui_map);
 
         sticker1 = (ImageView) findViewById(R.id.sticker_1);
         sticker2 = (ImageView) findViewById(R.id.sticker_2);
@@ -89,11 +89,11 @@ public class Room extends AppCompatActivity
             @Override
             public void onProductPickup(Work work, List<String> allStickers)
             {
-                sticker1.setImageResource(R.drawable.sticker);
-                sticker2.setImageResource(R.drawable.sticker);
+                sticker1.setImageResource(R.drawable.gui_sticker);
+                sticker2.setImageResource(R.drawable.gui_sticker);
 
                 ImageView near = pointsOnMap.get(String.valueOf(work.getBeacon().getUuid()));
-                near.setImageResource(R.drawable.sticker_hover);
+                near.setImageResource(R.drawable.gui_sticker_hover);
 
                 showNotice(work);
             }
@@ -101,8 +101,8 @@ public class Room extends AppCompatActivity
             @Override
             public void onProductPutdown(Work work)
             {
-                sticker1.setImageResource(R.drawable.sticker);
-                sticker2.setImageResource(R.drawable.sticker);
+                sticker1.setImageResource(R.drawable.gui_sticker);
+                sticker2.setImageResource(R.drawable.gui_sticker);
             }
         });
         prepareTabLayout();
