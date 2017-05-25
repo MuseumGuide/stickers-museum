@@ -49,12 +49,8 @@ public class Room extends AppCompatActivity
     private ImageView sticker4;
     private RelativeLayout background;
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
-
     private ViewPager mViewPager;
     private TabLayout tabLayout;
-
-
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
@@ -114,7 +110,6 @@ public class Room extends AppCompatActivity
 
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -136,7 +131,6 @@ public class Room extends AppCompatActivity
         mDrawerLayout.addDrawerListener(mToggle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToggle.syncState();
-
 
         SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
