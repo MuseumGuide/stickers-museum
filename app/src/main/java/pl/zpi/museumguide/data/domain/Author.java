@@ -1,24 +1,15 @@
 package pl.zpi.museumguide.data.domain;
 
-import java.util.*;
+import java.util.ArrayList;
 
 public class Author {
 
 	private String firstname;
 	private String lastname;
 	private String alias;
-	private Collection<Work> works;
+	private String description;
+	private ArrayList<Work> works = new ArrayList<>();
 	private int id_drawable;
-
-	public Author() {
-	}
-
-	public Author(String firstname, String lastname, String alias, Collection<Work> works) {
-		this.firstname = firstname;
-		this.lastname = lastname;
-		this.alias = alias;
-		this.works = works;
-	}
 
 	public String getFirstname() {
 		return firstname;
@@ -44,11 +35,19 @@ public class Author {
 		this.alias = alias;
 	}
 
-	public Collection<Work> getWorks() {
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public ArrayList<Work> getWorks() {
 		return works;
 	}
 
-	public void setWorks(Collection<Work> works) {
+	public void setWorks(ArrayList<Work> works) {
 		this.works = works;
 	}
 
@@ -57,9 +56,6 @@ public class Author {
 	public void setIdDrawable(int id_drawable) { this.id_drawable = id_drawable; }
 
 	public void addWork(Work work) {
-		if (works == null)
-			works = new ArrayList<>();
-
 		works.add(work);
 	}
 

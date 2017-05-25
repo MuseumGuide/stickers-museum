@@ -4,6 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import pl.zpi.museumguide.data.domain.Author;
+
 /**
  * Created by verat on 2017-05-05.
  */
@@ -12,6 +14,8 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
     }
+
+    public GalleryFrag gallery;
 
     @Override
     public Fragment getItem(int position) {
@@ -22,10 +26,15 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new AuthorInfoFrag();
             case 2:
-                return new GalleryFrag();
+            {
+                gallery = new GalleryFrag();
+                return gallery;
+            }
         }
         return null;
     }
+
+    public void setAuthor(Author auth)    {        gallery.setAuthor(auth);    }
 
     @Override
     public int getCount() { return 3;}

@@ -43,8 +43,8 @@ public class RadarManager {
                     nearablesRssi.put(beacon, nearable.rssi);
                     Work currentWork = products.get(beacon);
                     //todo change this if to check beacon id not label
-                    if (!labels.contains(currentWork.getTitle() + "\n" + currentWork.getAuthors().get(0).getDisplayName()))
-                        labels.add(currentWork.getTitle() + "\n" + currentWork.getAuthors().get(0).getDisplayName());
+                    if (!labels.contains(currentWork.getTitle() + "\n" + currentWork.getAuthor().getDisplayName()))
+                        labels.add(currentWork.getTitle() + "\n" + currentWork.getAuthor().getDisplayName());
 
                     Work work = products.get(getBest(nearablesRssi));
                     listener.onProductPickup(work, labels);

@@ -1,11 +1,13 @@
 package pl.zpi.museumguide.data.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Work {
 
 	private String title;
-	private List<Author> authors;
+	private String description;
+	private Author author;
 	private WorkType type;
 	private List<Context> information;
 	private List<Material> materials;
@@ -15,9 +17,9 @@ public class Work {
 	public Work() {
 	}
 
-	public Work(String title, List<Author> authors, WorkType type, List<Context> information, List<Material> materials, Beacon beacon) {
+	public Work(String title, Author author, WorkType type, List<Context> information, List<Material> materials, Beacon beacon) {
 		this.title = title;
-		this.authors = authors;
+		this.author = author;
 		this.type = type;
 		this.information = information;
 		this.materials = materials;
@@ -33,12 +35,20 @@ public class Work {
 		this.title = title;
 	}
 
-	public List<Author> getAuthors() {
-		return authors;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setAuthors(List<Author> authors) {
-		this.authors = authors;
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
 	}
 
 	public WorkType getType() {
@@ -79,14 +89,6 @@ public class Work {
 		this.beacon = beacon;
 	}
 
-	//todo think about initialising in constructor
-	public void addAuthor(Author author) {
-		if (authors == null)
-			authors = new ArrayList<>();
-
-		authors.add(author);
-	}
-
 	public void addContext(Context context) {
 		if (information == null)
 			information = new ArrayList<>();
@@ -97,7 +99,6 @@ public class Work {
 	public void addMaterial(Material material) {
 		if (materials == null)
 			materials = new ArrayList<>();
-
 		materials.add(material);
 	}
 }
