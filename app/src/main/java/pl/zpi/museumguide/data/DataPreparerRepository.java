@@ -58,7 +58,7 @@ public class DataPreparerRepository implements DataRepository {
         a1.setLastname("Brueghel");
         a1.setAlias("Młodszy");
         a1.setDescription(descrPieterBrueghel);
-        a1.setIdDrawable(R.drawable.pieterbrueghel);
+        a1.setIdDrawable(R.drawable.data_pieterbrueghel);
 
         Context c1 = new Context();
         c1.setName("Barok");
@@ -103,7 +103,7 @@ public class DataPreparerRepository implements DataRepository {
         w1.setType(WorkType.PAINTING);
         w1.setBeacon(b1);
         w1.setAuthor(a1);
-        w1.setIdDrawable(R.drawable.zimowy);
+        w1.setIdDrawable(R.drawable.data_zimowy);
 
         b1.addWork(w1);
 
@@ -117,7 +117,7 @@ public class DataPreparerRepository implements DataRepository {
         w2.setType(WorkType.PAINTING);
         w2.setBeacon(b2);
         w2.setAuthor(a1);
-        w2.setIdDrawable(R.drawable.glowa);
+        w2.setIdDrawable(R.drawable.data_glowa);
 
         b2.addWork(w2);
 
@@ -128,7 +128,7 @@ public class DataPreparerRepository implements DataRepository {
         w3.addMaterial(m1);
         w3.addMaterial(m2);
         w3.setType(WorkType.PAINTING);
-        w3.setIdDrawable(R.drawable.przyslowia);
+        w3.setIdDrawable(R.drawable.data_przyslowia);
 
         Work w4 = new Work();
         w4.setTitle("Triumf śmierci");
@@ -137,7 +137,7 @@ public class DataPreparerRepository implements DataRepository {
         w4.addMaterial(m1);
         w4.addMaterial(m2);
         w4.setType(WorkType.PAINTING);
-        w4.setIdDrawable(R.drawable.smierc);
+        w4.setIdDrawable(R.drawable.data_smierc);
 
         Collections.addAll(a1.getWorks(), w1, w2, w3, w4);
         Collections.addAll(works, w1, w2, w3, w4);
