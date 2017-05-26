@@ -29,50 +29,114 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="120dp">
 
-                <RelativeLayout
-                    android:id="@+id/map"
+                <ViewFlipper
+                    android:id="@+id/flipper"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/sticker_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignTop="@+id/sticker_2"
-                        android:layout_marginStart="29dp"
-                        app:srcCompat="@drawable/gui_sticker" />
+                    <RelativeLayout
+                        android:id="@+id/map"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/gui_map"
+                        tools:layout_editor_absoluteX="8dp"
+                        tools:layout_editor_absoluteY="8dp">
 
-                    <ImageView
-                        android:id="@+id/sticker_2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_alignParentTop="true"
-                        android:layout_marginEnd="69dp"
-                        android:layout_marginTop="25dp"
-                        app:srcCompat="@drawable/gui_sticker" />
+                    </RelativeLayout>
 
-                    <ImageView
-                        android:id="@+id/sticker_3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_alignStart="@+id/sticker_2"
-                        android:layout_marginBottom="52dp"
-                        android:layout_marginStart="34dp"
-                        app:srcCompat="@drawable/gui_sticker" />
+                    <RelativeLayout
+                        android:id="@+id/map2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/gui_room1">
 
-                    <ImageView
-                        android:id="@+id/sticker_4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/sticker_3"
-                        android:layout_alignStart="@+id/sticker_3"
-                        android:layout_marginBottom="108dp"
-                        app:srcCompat="@drawable/gui_sticker" />
+                        <ImageView
+                            android:id="@+id/sticker_21"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_below="@+id/sticker_22"
+                            android:layout_marginStart="30dp"
+                            app:srcCompat="@drawable/gui_sticker" />
 
-                </RelativeLayout>
+                        <ImageView
+                            android:id="@+id/sticker_22"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginEnd="87dp"
+                            android:layout_marginTop="88dp"
+                            app:srcCompat="@drawable/gui_sticker" />
+
+                        <ImageView
+                            android:id="@+id/sticker_23"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="54dp"
+                            android:layout_marginEnd="28dp"
+                            android:layout_toStartOf="@+id/sticker_22"
+                            app:srcCompat="@drawable/gui_sticker" />
+
+                        <ImageView
+                            android:id="@+id/sticker_24"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@+id/sticker_23"
+                            android:layout_marginStart="19dp"
+                            android:layout_toEndOf="@+id/sticker_21"
+                            app:srcCompat="@drawable/gui_sticker" />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/map3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/gui_room2">
+
+                        <ImageView
+                            android:id="@+id/sticker_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignTop="@+id/sticker_2"
+                            android:layout_marginStart="29dp"
+                            app:srcCompat="@drawable/gui_sticker" />
+
+                        <ImageView
+                            android:id="@+id/sticker_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginEnd="69dp"
+                            android:layout_marginTop="25dp"
+                            app:srcCompat="@drawable/gui_sticker" />
+
+                        <ImageView
+                            android:id="@+id/sticker_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignStart="@+id/sticker_2"
+                            android:layout_marginBottom="52dp"
+                            android:layout_marginStart="34dp"
+                            app:srcCompat="@drawable/gui_sticker" />
+
+                        <ImageView
+                            android:id="@+id/sticker_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@+id/sticker_3"
+                            android:layout_alignStart="@+id/sticker_3"
+                            android:layout_marginBottom="108dp"
+                            app:srcCompat="@drawable/gui_sticker" />
+
+                    </RelativeLayout>
+                </ViewFlipper>
 
             </FrameLayout>
 

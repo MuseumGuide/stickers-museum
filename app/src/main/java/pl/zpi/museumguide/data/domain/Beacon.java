@@ -9,6 +9,7 @@ public class Beacon {
 //	private String minor;
 //	private String zoneName;
     private List<Work> works;
+    private int room;
 
     public Beacon() {
     }
@@ -26,10 +27,16 @@ public class Beacon {
 //	}
 
 
-    public Beacon(String uuid, List<Work> work) {
+    public Beacon(String uuid, List<Work> work, int room)
+    {
         this.uuid = uuid;
         this.works = work;
+        this.room = room;
     }
+
+    public int getRoom() { return room; }
+
+    public void setRoom(int room) {this.room = room; }
 
     public String getUuid() {
         return uuid;

@@ -18,5 +18,5 @@ public interface DataRepository {
     List<Work> getAllWorks();
     List<Work> getBeaconWork(String uuid);
     Beacon getBeacon(String uuid);
-
+    List<Beacon> getBeacons();
 }
