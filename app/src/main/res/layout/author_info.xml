@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -12,46 +11,46 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/authorNameFrag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="23dp"
-                android:text="AuthorInfo"
-                android:textSize="16sp" />
+        <TextView
+            android:id="@+id/authorNameFrag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="23dp"
+            android:text="AuthorInfo"
+            android:textSize="16sp" />
 
-            <ImageView
-                android:id="@+id/authorImageFrag"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_below="@+id/authorNameFrag"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                app:srcCompat="@drawable/logo" />
+        <ImageView
+            android:id="@+id/authorImageFrag"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="20dp"
+            app:srcCompat="@drawable/logo"
+            android:layout_below="@+id/authorNameFrag"
+            android:layout_centerHorizontal="true" />
 
-            <TextView
-                android:id="@+id/authorInfoFrag"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/authorImageFrag"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="19dp"
-                android:text="Author Works"
-                android:textSize="16sp" />
+        <TextView
+            android:id="@+id/authorInfoFrag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/authorImageFrag"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="19dp"
+            android:text="Author Works"
+            android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/authorWorks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/authorInfoFrag"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="28dp"
-                android:lineSpacingExtra="7dp"
-                android:text="TextView"
-                android:textSize="13sp" />
+        <TextView
+            android:id="@+id/authorWorks"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/authorInfoFrag"
+            android:lineSpacingExtra="7dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="28dp"
+            android:text="TextView"
+            android:textSize="13sp" />
 
         </RelativeLayout>
 

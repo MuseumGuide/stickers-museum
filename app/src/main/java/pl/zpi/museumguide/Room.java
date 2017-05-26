@@ -4,12 +4,9 @@ import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
@@ -49,11 +46,11 @@ public class Room extends AppCompatActivity
     private ImageView sticker4;
     private RelativeLayout background;
     private SectionsPagerAdapter mSectionsPagerAdapter;
+
+
     private ViewPager mViewPager;
     private TabLayout tabLayout;
-    private Toolbar mToolbar;
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mToggle;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -106,33 +103,14 @@ public class Room extends AppCompatActivity
             }
         });
         prepareTabLayout();
-
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        return mToggle.onOptionsItemSelected(item);
-
     }
 
     private void prepareTabLayout()
     {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
         mViewPager = (ViewPager) findViewById(R.id.container);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
-
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.roomLayout);
-        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.open, R.string.Close);
-
-        setSupportActionBar(mToolbar);
-        mDrawerLayout.addDrawerListener(mToggle);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToggle.syncState();
-
-        SectionsPagerAdapter mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setOffscreenPageLimit(3);

@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-
 import com.estimote.sdk.SystemRequirementsChecker;
 
 import java.util.HashMap;
@@ -74,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
                 authorLabel.setVisibility(View.INVISIBLE);
             }
         });
+
+
     }
 
     public void goToMap(View v)
