@@ -21,13 +21,13 @@
 
             <FrameLayout
                 android:id="@+id/background_room"
-                android:layout_width="301dp"
-                android:layout_height="353dp"
+                android:layout_width="match_parent"
+                android:layout_height="600dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="120dp">
+                android:background="#a3ccd6">
 
                 <ViewFlipper
                     android:id="@+id/flipper"
@@ -54,39 +54,36 @@
                             android:id="@+id/sticker_21"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_below="@+id/sticker_22"
-                            android:layout_marginStart="30dp"
-                            app:srcCompat="@drawable/gui_sticker" />
+                            android:layout_marginStart="77dp"
+                            app:srcCompat="@drawable/gui_sticker"
+                            android:layout_marginBottom="153dp"
+                            android:layout_above="@+id/sticker_24"
+                            android:layout_alignParentStart="true" />
 
                         <ImageView
                             android:id="@+id/sticker_22"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentTop="true"
-                            android:layout_marginEnd="87dp"
-                            android:layout_marginTop="88dp"
-                            app:srcCompat="@drawable/gui_sticker" />
+                            app:srcCompat="@drawable/gui_sticker"
+                            android:layout_alignTop="@+id/sticker_21"
+                            android:layout_centerHorizontal="true" />
 
                         <ImageView
                             android:id="@+id/sticker_23"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="90dp"
+                            app:srcCompat="@drawable/gui_sticker"
                             android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="54dp"
-                            android:layout_marginEnd="28dp"
-                            android:layout_toStartOf="@+id/sticker_22"
-                            app:srcCompat="@drawable/gui_sticker" />
+                            android:layout_alignStart="@+id/sticker_22" />
 
                         <ImageView
                             android:id="@+id/sticker_24"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            app:srcCompat="@drawable/gui_sticker"
                             android:layout_alignTop="@+id/sticker_23"
-                            android:layout_marginStart="19dp"
-                            android:layout_toEndOf="@+id/sticker_21"
-                            app:srcCompat="@drawable/gui_sticker" />
+                            android:layout_alignStart="@+id/sticker_21" />
 
                     </RelativeLayout>
 
@@ -101,41 +98,39 @@
                             android:id="@+id/sticker_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
+                            app:srcCompat="@drawable/gui_sticker"
                             android:layout_alignTop="@+id/sticker_2"
-                            android:layout_marginStart="29dp"
-                            app:srcCompat="@drawable/gui_sticker" />
+                            android:layout_alignStart="@+id/sticker_4" />
 
                         <ImageView
                             android:id="@+id/sticker_2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentTop="true"
-                            android:layout_marginEnd="69dp"
-                            android:layout_marginTop="25dp"
-                            app:srcCompat="@drawable/gui_sticker" />
+                            android:layout_marginBottom="118dp"
+                            app:srcCompat="@drawable/gui_sticker"
+                            android:layout_marginEnd="60dp"
+                            android:layout_above="@+id/sticker_3"
+                            android:layout_toStartOf="@+id/sticker_1" />
 
                         <ImageView
                             android:id="@+id/sticker_3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="90dp"
+                            app:srcCompat="@drawable/gui_sticker"
                             android:layout_alignParentBottom="true"
-                            android:layout_alignStart="@+id/sticker_2"
-                            android:layout_marginBottom="52dp"
-                            android:layout_marginStart="34dp"
-                            app:srcCompat="@drawable/gui_sticker" />
+                            android:layout_alignStart="@+id/sticker_2" />
 
                         <ImageView
                             android:id="@+id/sticker_4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_above="@+id/sticker_3"
-                            android:layout_alignStart="@+id/sticker_3"
-                            android:layout_marginBottom="108dp"
+                            android:layout_alignTop="@+id/sticker_3"
+                            android:layout_centerHorizontal="true"
                             app:srcCompat="@drawable/gui_sticker" />
 
                     </RelativeLayout>
+
                 </ViewFlipper>
 
             </FrameLayout>
