@@ -58,21 +58,15 @@ public class BeaconDetectedBehaviorTest {
             Room.class);
 
     @Before
-    public void initValidString() throws NoSuchFieldException, IllegalAccessException {
-        DataRepository dataRepository = new DataPreparerRepository();
-        room = mActivityRule.getActivity();
-
-        // Specify a valid string.
-        work = dataRepository.getAllWorks().get(0);
-        beacon = work.getBeacon();
-        beaconManager = room.radarManager.getBeaconManager();
-
-        mTitleString = work.getTitle();
-    }
-
-    @Test
-    public void assertWorkTitle() throws Throwable {
+    public void initValidString() throws Throwable {
         mActivityRule.runOnUiThread(() -> {
+            DataRepository dataRepository = new DataPreparerRepository();
+            room = mActivityRule.getActivity();
+
+            // Specify a valid string.
+            work = dataRepository.getAllWorks().get(0);
+            beacon = work.getBeacon();
+            beaconManager = room.radarManager.getBeaconManager();
 
             Field f = null; //NoSuchFieldException
             try {
@@ -93,6 +87,14 @@ public class BeaconDetectedBehaviorTest {
 
             listener.onNearablesDiscovered(nearables);
         });
+
+
+        mTitleString = work.getTitle();
+    }
+
+    @Test
+    public void assertWorkTitle() throws Throwable {
+
 
         room.showNotice(work);
         onView(withId(R.id.MapWorkTitle))
