@@ -66,26 +66,21 @@ public class BeaconDetectedBehaviorTest {
         DataRepository dataRepository = new DataPreparerRepository();
         work = dataRepository.getAllWorks().get(0);
         room = mActivityRule.getActivity();
-
-        // Specify a valid string.
         work = dataRepository.getAllWorks().get(0);
         beacon = work.getBeacon();
         beaconManager = room.radarManager.getBeaconManager();
 
-        Field f = beaconManager.getClass().getDeclaredField("nearableListener");; //NoSuchFieldException
+        //Java reflections
+        Field f = beaconManager.getClass().getDeclaredField("nearableListener");
         f.setAccessible(true);
-
-        try {
-            listener = (BeaconManager.NearableListener) f.get(beaconManager);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
+        listener = (BeaconManager.NearableListener) f.get(beaconManager);
 
         //list nearables
         nearables = new ArrayList<>();
         nearables.add(new Nearable(beacon.getUuid(), null, null, null, null, null, 0.0d, -5, false, 0.0d, 0.0d, 0.0d, 0, 0, null, null));
 
 
+        //call onNearablesDiscovered with our beacon
         mActivityRule.runOnUiThread(() -> mHandler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message message) {
@@ -94,6 +89,7 @@ public class BeaconDetectedBehaviorTest {
         });
 
 
+        //set valid bottom sheet string
         mTitleString = work.getTitle();
     }
 
@@ -103,7 +99,6 @@ public class BeaconDetectedBehaviorTest {
         Message message = mHandler.obtainMessage(0, null);
         message.sendToTarget();
 
-       // room.showNotice(work);
         onView(withId(R.id.MapWorkTitle))
                 .check(matches(withText(mTitleString)));
     }
