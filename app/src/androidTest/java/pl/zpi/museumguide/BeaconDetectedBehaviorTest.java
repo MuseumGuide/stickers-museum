@@ -10,6 +10,7 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
 import android.support.test.runner.lifecycle.Stage;
+import android.view.WindowManager;
 
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Nearable;
@@ -88,9 +89,22 @@ public class BeaconDetectedBehaviorTest {
             }
         });
 
+        unlockScreen();
 
         //set valid bottom sheet string
         mTitleString = work.getTitle();
+    }
+
+
+    public void unlockScreen() {
+        Runnable wakeUpDevice = new Runnable() {
+            public void run() {
+                room.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
+                        WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                        WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            }
+        };
+        room.runOnUiThread(wakeUpDevice);
     }
 
     @Test
