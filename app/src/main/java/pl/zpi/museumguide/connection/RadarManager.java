@@ -85,4 +85,8 @@ public class RadarManager {
     public void destroy() {
         beaconManager.disconnect();
     }
+
+    public BeaconManager getBeaconManager() {
+        return this.beaconManager;
+    }
 }

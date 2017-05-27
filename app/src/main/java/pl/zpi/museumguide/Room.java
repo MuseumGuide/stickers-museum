@@ -36,7 +36,7 @@ public class Room extends AppCompatActivity
     private static final String TAG = "Room";
 
     private DataRepository dataRepository;
-    private RadarManager radarManager;
+    RadarManager radarManager;
     private ArrayAdapter<String> arrayAdapter;
     private Map<String, ImageView> pointsOnMap;
     private ListView lv;
