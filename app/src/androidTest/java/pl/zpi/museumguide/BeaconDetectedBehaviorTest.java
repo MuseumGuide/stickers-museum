@@ -1,6 +1,9 @@
 package pl.zpi.museumguide;
 
 import android.app.Activity;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.support.test.espresso.core.deps.guava.collect.Iterables;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
@@ -52,6 +55,7 @@ public class BeaconDetectedBehaviorTest {
     private List<Nearable> nearables;
     private BeaconManager beaconManager;
     private Beacon beacon;
+    private Handler mHandler;
 
     @Rule
     public ActivityTestRule<Room> mActivityRule = new ActivityTestRule<>(
@@ -59,33 +63,34 @@ public class BeaconDetectedBehaviorTest {
 
     @Before
     public void initValidString() throws Throwable {
-        mActivityRule.runOnUiThread(() -> {
-            DataRepository dataRepository = new DataPreparerRepository();
-            room = mActivityRule.getActivity();
+        DataRepository dataRepository = new DataPreparerRepository();
+        work = dataRepository.getAllWorks().get(0);
+        room = mActivityRule.getActivity();
 
-            // Specify a valid string.
-            work = dataRepository.getAllWorks().get(0);
-            beacon = work.getBeacon();
-            beaconManager = room.radarManager.getBeaconManager();
+        // Specify a valid string.
+        work = dataRepository.getAllWorks().get(0);
+        beacon = work.getBeacon();
+        beaconManager = room.radarManager.getBeaconManager();
 
-            Field f = null; //NoSuchFieldException
-            try {
-                f = beaconManager.getClass().getDeclaredField("nearableListener");
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
+        Field f = beaconManager.getClass().getDeclaredField("nearableListener");; //NoSuchFieldException
+        f.setAccessible(true);
+
+        try {
+            listener = (BeaconManager.NearableListener) f.get(beaconManager);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        //list nearables
+        nearables = new ArrayList<>();
+        nearables.add(new Nearable(beacon.getUuid(), null, null, null, null, null, 0.0d, -5, false, 0.0d, 0.0d, 0.0d, 0, 0, null, null));
+
+
+        mActivityRule.runOnUiThread(() -> mHandler = new Handler(Looper.getMainLooper()) {
+            @Override
+            public void handleMessage(Message message) {
+                listener.onNearablesDiscovered(nearables);
             }
-            f.setAccessible(true);
-            try {
-                listener = (BeaconManager.NearableListener) f.get(beaconManager);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-
-            //list nearables
-            nearables = new ArrayList<>();
-            nearables.add(new Nearable(beacon.getUuid(), null, null, null, null, null, 0.0d, -5, false, 0.0d, 0.0d, 0.0d, 0, 0, null, null));
-
-            listener.onNearablesDiscovered(nearables);
         });
 
 
@@ -95,8 +100,10 @@ public class BeaconDetectedBehaviorTest {
     @Test
     public void assertWorkTitle() throws Throwable {
 
+        Message message = mHandler.obtainMessage(0, null);
+        message.sendToTarget();
 
-        room.showNotice(work);
+       // room.showNotice(work);
         onView(withId(R.id.MapWorkTitle))
                 .check(matches(withText(mTitleString)));
     }
