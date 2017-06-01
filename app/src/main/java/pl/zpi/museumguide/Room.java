@@ -1,12 +1,22 @@
 package pl.zpi.museumguide;
 
+import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.DrawableContainer;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.TabLayout;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
@@ -14,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.estimote.sdk.SystemRequirementsChecker;
 
@@ -46,11 +57,14 @@ public class Room extends AppCompatActivity
     private ImageView sticker4;
     private RelativeLayout background;
     private SectionsPagerAdapter mSectionsPagerAdapter;
-
-
     private ViewPager mViewPager;
     private TabLayout tabLayout;
-    private Toolbar toolbar;
+
+
+    private DrawerLayout mDrawerLayout;
+    private ActionBarDrawerToggle mToggle;
+    private Toolbar mToolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -103,12 +117,58 @@ public class Room extends AppCompatActivity
             }
         });
         prepareTabLayout();
+
+        mToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
+
+        setSupportActionBar(mToolbar);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.room_layout);
+        mToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
+
+        mDrawerLayout.addDrawerListener(mToggle);
+
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Map Activity");
+
+
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mToggle.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        return mToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
     private void prepareTabLayout()
     {
+//        mToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
+//
+//        setSupportActionBar(mToolbar);
+//        mDrawerLayout = (DrawerLayout) findViewById(R.id.room_layout);
+//        mToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
+//
+//        mDrawerLayout.addDrawerListener(mToggle);
+//
+//
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setTitle("Map Activity");
+
+
+
         tabLayout = (TabLayout) findViewById(R.id.tabs);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
         mViewPager = (ViewPager) findViewById(R.id.container);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
@@ -133,6 +193,10 @@ public class Room extends AppCompatActivity
             setGalleryFragment(work.getAuthor());
         }
     }
+
+
+
+
 
     private void setGalleryFragment(Author auth)
     {
