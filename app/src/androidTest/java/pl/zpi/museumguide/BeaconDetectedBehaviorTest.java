@@ -35,8 +35,6 @@ import pl.zpi.museumguide.data.DataRepository;
 import pl.zpi.museumguide.data.domain.Beacon;
 import pl.zpi.museumguide.data.domain.Work;
 
-import static android.support.test.InstrumentationRegistry.getInstrumentation;
-import static org.mockito.Mockito.*;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -51,11 +49,8 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 public class BeaconDetectedBehaviorTest {
     private String mTitleString;
     private Room room;
-    private Work work;
     private BeaconManager.NearableListener listener;
     private List<Nearable> nearables;
-    private BeaconManager beaconManager;
-    private Beacon beacon;
     private Handler mHandler;
 
     @Rule
@@ -64,12 +59,10 @@ public class BeaconDetectedBehaviorTest {
 
     @Before
     public void initValidString() throws Throwable {
-        DataRepository dataRepository = new DataPreparerRepository();
-        work = dataRepository.getAllWorks().get(0);
+        Work work = new DataPreparerRepository().getAllWorks().get(0);
         room = mActivityRule.getActivity();
-        work = dataRepository.getAllWorks().get(0);
-        beacon = work.getBeacon();
-        beaconManager = room.radarManager.getBeaconManager();
+        Beacon beacon = work.getBeacon();
+        BeaconManager beaconManager = room.radarManager.getBeaconManager();
 
         //Java reflections
         Field f = beaconManager.getClass().getDeclaredField("nearableListener");
@@ -97,13 +90,10 @@ public class BeaconDetectedBehaviorTest {
 
 
     public void unlockScreen() {
-        Runnable wakeUpDevice = new Runnable() {
-            public void run() {
-                room.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
+        Runnable wakeUpDevice = () -> room.getWindow()
+                .addFlags(WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
                         WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
                         WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            }
-        };
         room.runOnUiThread(wakeUpDevice);
     }
 
