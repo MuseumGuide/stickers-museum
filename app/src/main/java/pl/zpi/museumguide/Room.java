@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.GravityCompat;
@@ -16,6 +17,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -41,8 +43,7 @@ import pl.zpi.museumguide.data.domain.Beacon;
 import pl.zpi.museumguide.data.domain.Work;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
-public class Room extends AppCompatActivity
-{
+public class Room extends AppCompatActivity {
 
     private static final String TAG = "Room";
 
@@ -67,8 +68,7 @@ public class Room extends AppCompatActivity
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
 
@@ -98,8 +98,7 @@ public class Room extends AppCompatActivity
 
         radarManager.setListener(new RadarManager.Listener() {
             @Override
-            public void onProductPickup(Work work, List<String> allStickers)
-            {
+            public void onProductPickup(Work work, List<String> allStickers) {
                 sticker1.setImageResource(R.drawable.gui_sticker);
                 sticker2.setImageResource(R.drawable.gui_sticker);
 
@@ -110,50 +109,83 @@ public class Room extends AppCompatActivity
             }
 
             @Override
-            public void onProductPutdown(Work work)
-            {
+            public void onProductPutdown(Work work) {
                 sticker1.setImageResource(R.drawable.gui_sticker);
                 sticker2.setImageResource(R.drawable.gui_sticker);
             }
         });
-        prepareTabLayout();
+
 
         mToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
-
         setSupportActionBar(mToolbar);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.room_layout);
-        mToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
 
-        mDrawerLayout.addDrawerListener(mToggle);
-
-
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Map Activity");
+
+        //set click listener on all toolbar (not needed)
+        findViewById(R.id.navigation_toolbar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mDrawerLayout.openDrawer(Gravity.LEFT, true);
+            }
+        });
+
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.room_layout);
+        NavigationView n = (NavigationView) findViewById(R.id.room_nav);
+        n.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    ////.......
+
+                }
+                mDrawerLayout.closeDrawers();  // CLOSE DRAWER
+                return true;
+            }
+        });
 
 
+//        mDrawerLayout = (DrawerLayout) findViewById(R.id.room_layout);
+//        mToggle = new ActionBarDrawerToggle(this,mDrawerLayout,R.string.open,R.string.close);
+//        mToggle.setToolbarNavigationClickListener(view -> {
+//            int x =0;
+//        });
+//        mDrawerLayout.addDrawerListener(mToggle);
+//
+//
+//
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setTitle("Map Activity");
+
+        prepareTabLayout();
     }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
-        mToggle.syncState();
+        //mToggle.syncState();
     }
 
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        mToggle.onConfigurationChanged(newConfig);
-    }
+//    @Override
+//    public void onConfigurationChanged(Configuration newConfig) {
+//        super.onConfigurationChanged(newConfig);
+//        mToggle.onConfigurationChanged(newConfig);
+//    }
 
+
+    //here the drawer is opened
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        return mToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
-    private void prepareTabLayout()
-    {
+    private void prepareTabLayout() {
 //        mToolbar = (Toolbar) findViewById(R.id.navigation_toolbar);
 //
 //        setSupportActionBar(mToolbar);
@@ -167,7 +199,6 @@ public class Room extends AppCompatActivity
 //        getSupportActionBar().setTitle("Map Activity");
 
 
-
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         mViewPager = (ViewPager) findViewById(R.id.container);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -177,15 +208,13 @@ public class Room extends AppCompatActivity
         tabLayout.setupWithViewPager(mViewPager);
     }
 
-    public void showNotice(Work work)
-    {
+    public void showNotice(Work work) {
         View bottomSheet = findViewById(R.id.design_bottom_sheet);
 
         final BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
-        if(behavior.getState() == BottomSheetBehavior.STATE_HIDDEN)
+        if (behavior.getState() == BottomSheetBehavior.STATE_HIDDEN)
             behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        if(behavior.getState() == BottomSheetBehavior.STATE_COLLAPSED)
-        {
+        if (behavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
             TextView title = (TextView) findViewById(R.id.MapWorkTitle);
             title.setText(work.getTitle());
             setWorkInfoFragment(work);
@@ -195,18 +224,13 @@ public class Room extends AppCompatActivity
     }
 
 
-
-
-
-    private void setGalleryFragment(Author auth)
-    {
+    private void setGalleryFragment(Author auth) {
         mSectionsPagerAdapter.setAuthor(auth);
         GridView grid = (GridView) findViewById(R.id.gridView);
         grid.invalidateViews();
     }
 
-    private void setAuthorInfoFragment(Work work)
-    {
+    private void setAuthorInfoFragment(Work work) {
         TextView authorName = (TextView) findViewById(R.id.authorNameFrag);
         Author author = work.getAuthor();
         authorName.setText(author.getFirstname() + " " + author.getLastname());
@@ -218,14 +242,13 @@ public class Room extends AppCompatActivity
         TextView authorWorks = (TextView) findViewById(R.id.authorWorks);
 
         String out_authorWorks = "";
-        for(Work obj : work.getAuthor().getWorks())
+        for (Work obj : work.getAuthor().getWorks())
             out_authorWorks += "-  " + obj.getTitle() + "\n";
 
         authorWorks.setText(out_authorWorks);
     }
 
-    private void setWorkInfoFragment(Work work)
-    {
+    private void setWorkInfoFragment(Work work) {
         TextView description = (TextView) findViewById(R.id.workDescriptionFragment);
         description.setText(work.getDescription());
 
