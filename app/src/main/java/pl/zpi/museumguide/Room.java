@@ -43,6 +43,7 @@ public class Room extends AppCompatActivity
 
     private DataRepository dataRepository;
     private RadarManager radarManager;
+
     private Map<String, ImageView> pointsOnMap;
     private ListView lv;
     private ImageView sticker1;
