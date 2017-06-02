@@ -12,6 +12,7 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
+import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -57,6 +58,7 @@ public class Room extends AppCompatActivity
     private ViewPager mViewPager;
     private TabLayout tabLayout;
     private Toolbar toolbar;
+    private boolean switchingRoom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -64,7 +66,9 @@ public class Room extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
 
-        amountStickersInRooms = countStickersInRooms();
+        //todo amount of rooms
+        amountStickersInRooms = new int[4];
+        switchingRoom = false;
 
         background = (RelativeLayout) findViewById(R.id.map);
         background.setBackgroundResource(R.drawable.gui_map);
@@ -82,7 +86,6 @@ public class Room extends AppCompatActivity
         radarManager = new RadarManager(this, products);
 
         flipper = (ViewFlipper) findViewById(R.id.flipper);
-        createFlipperAnimation();
 
         lastOption = 0;
 
@@ -94,42 +97,60 @@ public class Room extends AppCompatActivity
                 switch(work.getBeacon().getRoom())
                 {
                     case 1:
+                        if(!switchingRoom)
+                            createFlipperAnimation(1, false);
+
                         if(lastOption != 1)
                         {
                             flipper.setDisplayedChild(1);
-
-                            sticker1 = (ImageView) findViewById(R.id.sticker_21);
-                            sticker2 = (ImageView) findViewById(R.id.sticker_22);
-                            sticker3 = (ImageView) findViewById(R.id.sticker_23);
-                            sticker4 = (ImageView) findViewById(R.id.sticker_24);
-
-                            ImageView[] iv_stickers = {sticker1, sticker2, sticker3, sticker4};
-
-                            savePointsOnMap(work, iv_stickers);
-                            setNearSticker(work);
-                            showNotice(work);
-
                             lastOption = 1;
                         }
+
+                        sticker1 = (ImageView) findViewById(R.id.sticker_21);
+                        sticker2 = (ImageView) findViewById(R.id.sticker_22);
+                        sticker3 = (ImageView) findViewById(R.id.sticker_23);
+                        sticker4 = (ImageView) findViewById(R.id.sticker_24);
+
+                        amountStickersInRooms[0] = 4;
+
+                        //todo change this
+                        ImageView[] iv_stickers1 = {sticker1, sticker2, sticker3, sticker4};
+
+                        savePointsOnMap(work, iv_stickers1);
+                        setNearSticker(work);
+                        showNotice(work);
+
+                        createFlipperAnimation(1, true);
+                        switchingRoom = true;
+
                         break;
+
                     case 2:
+                        if(!switchingRoom)
+                            createFlipperAnimation(2, false);
+
                         if(lastOption != 2)
                         {
                             flipper.setDisplayedChild(2);
-
-                            sticker1 = (ImageView) findViewById(R.id.sticker_1);
-                            sticker2 = (ImageView) findViewById(R.id.sticker_2);
-                            sticker3 = (ImageView) findViewById(R.id.sticker_3);
-                            sticker4 = (ImageView) findViewById(R.id.sticker_4);
-
-                            ImageView[] iv_stickers = {sticker1, sticker2, sticker3, sticker4};
-
-                            savePointsOnMap(work, iv_stickers);
-                            setNearSticker(work);
-                            showNotice(work);
-
                             lastOption = 2;
                         }
+
+                        sticker1 = (ImageView) findViewById(R.id.sticker_1);
+                        sticker2 = (ImageView) findViewById(R.id.sticker_2);
+                        sticker3 = (ImageView) findViewById(R.id.sticker_3);
+                        sticker4 = (ImageView) findViewById(R.id.sticker_4);
+
+                        amountStickersInRooms[1] = 4;
+
+                        ImageView[] iv_stickers2 = {sticker1, sticker2, sticker3, sticker4};
+
+                        savePointsOnMap(work, iv_stickers2);
+                        setNearSticker(work);
+                        showNotice(work);
+
+                        createFlipperAnimation(2, true);
+                        switchingRoom = true;
+
                         break;
                 }
             }
@@ -157,14 +178,12 @@ public class Room extends AppCompatActivity
 
     private void savePointsOnMap(Work work, ImageView[] iv_stickers)
     {
-        //todo close code in one method and add to cases in switch
-
         pointsOnMap = new HashMap<>();
 
         int amountAdded = 0;
         for(Beacon b : dataRepository.getBeacons())
         {
-            if(b.getRoom() == work.getBeacon().getRoom() && amountAdded < amountStickersInRooms[work.getBeacon().getRoom()])
+            if(b.getRoom() == work.getBeacon().getRoom() && amountAdded < amountStickersInRooms[work.getBeacon().getRoom() - 1])
             {
                 pointsOnMap.put(b.getUuid(), iv_stickers[amountAdded]);
                 amountAdded++;
@@ -172,32 +191,42 @@ public class Room extends AppCompatActivity
         }
     }
 
-    private void createFlipperAnimation()
+    private void createFlipperAnimation(int option, boolean isRoom)
     {
         Animation fadeIn = new AlphaAnimation(0, 1);
         fadeIn.setInterpolator(new DecelerateInterpolator());
-        fadeIn.setDuration(600);
+        fadeIn.setStartOffset(1000);
+        fadeIn.setDuration(2000);
 
         Animation fadeOut = new AlphaAnimation(1, 0);
         fadeOut.setInterpolator(new AccelerateInterpolator());
-        fadeOut.setStartOffset(200);
-        fadeOut.setDuration(600);
+        fadeOut.setStartOffset(1000);
+        fadeOut.setDuration(2000);
 
-        AnimationSet animation = new AnimationSet(false);
-        animation.addAnimation(fadeIn);
-        animation.addAnimation(fadeOut);
+        Animation zoom;
+
+        if(!isRoom)
+        {
+            switch (option)
+            {
+                case 1:
+                    zoom = AnimationUtils.loadAnimation(this, R.anim.zoom1);
+                    zoom.setDuration(2100);
+                    flipper.setOutAnimation(zoom);
+                    break;
+
+                case 2:
+                    zoom = AnimationUtils.loadAnimation(this, R.anim.zoom2);
+                    zoom.setDuration(2100);
+                    flipper.setOutAnimation(zoom);
+                    break;
+            }
+        }
+
+        if(isRoom)
+            flipper.setOutAnimation(fadeOut);
 
         flipper.setInAnimation(fadeIn);
-        flipper.setOutAnimation(fadeOut);
-    }
-
-    private int[] countStickersInRooms()
-    {
-        //todo create counting function
-
-        int[] aa = {4, 4, 4, 4};
-
-        return aa;
     }
 
     private void prepareTabLayout()
