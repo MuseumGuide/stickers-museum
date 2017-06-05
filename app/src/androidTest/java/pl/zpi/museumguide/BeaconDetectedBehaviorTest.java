@@ -62,7 +62,7 @@ public class BeaconDetectedBehaviorTest {
         Work work = new DataPreparerRepository().getAllWorks().get(0);
         room = mActivityRule.getActivity();
         Beacon beacon = work.getBeacon();
-        BeaconManager beaconManager = room.radarManager.getBeaconManager();
+        BeaconManager beaconManager = room.getRadarManager().getBeaconManager();
 
         //Java reflections
         Field f = beaconManager.getClass().getDeclaredField("nearableListener");
