@@ -28,7 +28,7 @@ public class DataPreparerRepository implements DataRepository {
      /**
      * UUID Mario 1
      */
-    public static final String beacon1UUID = "4810b7186752df3a";
+    public static final String beacon1UUID = "9d52d31fa9e0f214";
     // UUID Mati 1 "9d52d31fa9e0f214"
     // UUID Mario 1 "4810b7186752df3a"
     // UUID Bed "04fa06a3e84db44d"
@@ -37,7 +37,7 @@ public class DataPreparerRepository implements DataRepository {
     /**
      * UUID Mario 2
      */
-    public static final String beacon2UUID = "3804f0fbfdafcc37";
+    public static final String beacon2UUID = "c0e0ce88435105aa";
     // UUID Mati 2 "c0e0ce88435105aa"
     // UUID Mario 2 "3804f0fbfdafcc37"
     // UUID Door_blue "3b3101cd591facae"
@@ -88,9 +88,11 @@ public class DataPreparerRepository implements DataRepository {
 
         Beacon b1 = new Beacon();
         b1.setUuid(beacon1UUID);
+        b1.setRoom(1);
 
         Beacon b2 = new Beacon();
         b2.setUuid(beacon2UUID);
+        b2.setRoom(2);
 
 
         Work w1 = new Work();
@@ -172,5 +174,11 @@ public class DataPreparerRepository implements DataRepository {
         }
 
         return null;
+    }
+
+    @Override
+    public List<Beacon> getAllBeacons()
+    {
+        return beacons;
     }
 }
