@@ -300,6 +300,11 @@ public class Room extends AppCompatActivity
         PhotoViewAttacher photoAttacher = new PhotoViewAttacher(workImage);
     }
 
+    public RadarManager getRadarManager()
+    {
+        return radarManager;
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
