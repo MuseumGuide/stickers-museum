@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.GridView;
@@ -182,7 +181,7 @@ public class Room extends AppCompatActivity
         pointsOnMap = new HashMap<>();
 
         int amountAdded = 0;
-        for(Beacon b : dataRepository.getBeacons())
+        for(Beacon b : dataRepository.getAllBeacons())
         {
             if(b.getRoom() == work.getBeacon().getRoom() && amountAdded < amountStickersInRooms[work.getBeacon().getRoom() - 1])
             {

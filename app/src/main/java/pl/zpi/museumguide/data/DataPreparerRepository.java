@@ -177,7 +177,7 @@ public class DataPreparerRepository implements DataRepository {
     }
 
     @Override
-    public List<Beacon> getBeacons()
+    public List<Beacon> getAllBeacons()
     {
         return beacons;
     }
