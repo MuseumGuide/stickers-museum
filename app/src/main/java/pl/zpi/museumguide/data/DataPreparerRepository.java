@@ -24,14 +24,14 @@ public class DataPreparerRepository implements DataRepository {
 
     List<Work> works;
     List<Beacon> beacons;
-    public static final String beacon1UUID = "4810b7186752df3a";
+    public static final String beacon1UUID = "9d52d31fa9e0f214";
 
     // UUID Mati 1 "9d52d31fa9e0f214"
     // UUID Mario 1 "4810b7186752df3a"
     // UUID Bed "04fa06a3e84db44d"
     // UUID Szaudi 1 "666f96ab72f221ac"
 
-    public static final String beacon2UUID = "3804f0fbfdafcc37";
+    public static final String beacon2UUID = "c0e0ce88435105aa";
 
     // UUID Mati 2 "c0e0ce88435105aa"
     // UUID Mario 2 "3804f0fbfdafcc37"

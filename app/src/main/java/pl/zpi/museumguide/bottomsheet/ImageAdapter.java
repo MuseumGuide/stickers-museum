@@ -1,6 +1,7 @@
 package pl.zpi.museumguide.bottomsheet;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,7 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
+
         View itemView = convertView;
         TextView text;
         ImageView image;
