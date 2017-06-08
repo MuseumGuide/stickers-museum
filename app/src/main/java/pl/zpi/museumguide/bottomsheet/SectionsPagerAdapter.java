@@ -42,15 +42,6 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position)
     {
-        //// TODO: 2017-05-05 Change text to icons
-        switch (position) {
-            case 0:
-                return "Work";
-            case 1:
-                return "Author";
-            case 2:
-                return "Gallery";
-        }
         return null;
     }
 }

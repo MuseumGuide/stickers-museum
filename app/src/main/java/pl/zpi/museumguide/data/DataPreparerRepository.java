@@ -24,23 +24,19 @@ public class DataPreparerRepository implements DataRepository {
 
     List<Work> works;
     List<Beacon> beacons;
+    public static final String beacon1UUID = "4810b7186752df3a";
 
-     /**
-     * UUID Mario 1
-     */
-    public static final String beacon1UUID = "9d52d31fa9e0f214";
     // UUID Mati 1 "9d52d31fa9e0f214"
     // UUID Mario 1 "4810b7186752df3a"
     // UUID Bed "04fa06a3e84db44d"
+    // UUID Szaudi 1 "666f96ab72f221ac"
 
+    public static final String beacon2UUID = "3804f0fbfdafcc37";
 
-    /**
-     * UUID Mario 2
-     */
-    public static final String beacon2UUID = "c0e0ce88435105aa";
     // UUID Mati 2 "c0e0ce88435105aa"
     // UUID Mario 2 "3804f0fbfdafcc37"
     // UUID Door_blue "3b3101cd591facae"
+    // UUID Szaudi 2 "3895f793dfc8c681"
 
     public DataPreparerRepository() {
         works = new ArrayList<>();
@@ -157,8 +153,7 @@ public class DataPreparerRepository implements DataRepository {
     public List<Work> getBeaconWork(String uuid) {
         List<Work> result = new LinkedList<>();
         //todo think about returning copy (if fetched from API no sense to copy)
-        for (Work w :
-                works) {
+        for (Work w : works) {
             if (w.getBeacon().getUuid().equals(uuid))
                 result.add(w);
         }

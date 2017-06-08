@@ -1,12 +1,14 @@
 package pl.zpi.museumguide;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
@@ -233,12 +235,17 @@ public class Room extends AppCompatActivity
     {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.bottom_arrow_up);
         mViewPager = (ViewPager) findViewById(R.id.container);
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         mViewPager.setAdapter(mSectionsPagerAdapter);
         mViewPager.setOffscreenPageLimit(3);
         tabLayout.setupWithViewPager(mViewPager);
+
+        tabLayout.getTabAt(0).setIcon(R.drawable.gui_work_icon);
+        tabLayout.getTabAt(1).setIcon(R.drawable.gui_artist_icon);
+        tabLayout.getTabAt(2).setIcon(R.drawable.gui_gallery_icon);
     }
 
     public void showNotice(Work work)
@@ -246,16 +253,37 @@ public class Room extends AppCompatActivity
         View bottomSheet = findViewById(R.id.design_bottom_sheet);
 
         final BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+        behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                if(newState == BottomSheetBehavior.STATE_EXPANDED && toolbar != null)
+                    toolbar.setNavigationIcon(R.drawable.bottom_arrow_down);
+                if(newState == BottomSheetBehavior.STATE_COLLAPSED)
+                    toolbar.setNavigationIcon(R.drawable.bottom_arrow_up);
+            }
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+            }
+        });
         if(behavior.getState() == BottomSheetBehavior.STATE_HIDDEN)
             behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         if(behavior.getState() == BottomSheetBehavior.STATE_COLLAPSED)
         {
             TextView title = (TextView) findViewById(R.id.MapWorkTitle);
             title.setText(work.getTitle());
+            title.setGravity(Gravity.LEFT);
+            if(title.getPaint().measureText(title.getText().toString()) > title.getWidth())
+                title.setTextSize(7);
+            else
+                title.setTextSize(14);
             setWorkInfoFragment(work);
             setAuthorInfoFragment(work);
             setGalleryFragment(work.getAuthor());
+            toolbar.setNavigationIcon(R.drawable.bottom_arrow_up);
+
         }
+
     }
 
     private void setGalleryFragment(Author auth)

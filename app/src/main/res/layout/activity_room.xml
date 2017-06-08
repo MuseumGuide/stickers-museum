@@ -139,28 +139,6 @@
         </android.support.constraint.ConstraintLayout>
     </android.support.v4.widget.NestedScrollView>
 
-    <!--<RelativeLayout-->
-    <!--android:id="@+id/design_bottom_sheet"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="586dp"-->
-    <!--android:background="@color/colorAccent"-->
-    <!--android:paddingBottom="@dimen/activity_vertical_margin"-->
-    <!--android:paddingLeft="@dimen/activity_horizontal_margin"-->
-    <!--android:paddingRight="@dimen/activity_horizontal_margin"-->
-    <!--android:paddingTop="@dimen/activity_vertical_margin"-->
-    <!--app:behavior_hideable="true"-->
-    <!--app:behavior_peekHeight="50dp"-->
-    <!--app:elevation="4dp"-->
-    <!--app:layout_behavior="@string/bottom_sheet_behavior">-->
-
-    <!--<TextView-->
-    <!--android:id="@+id/bottomsheet_text"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="match_parent"-->
-    <!--android:text="Work title"-->
-    <!--android:textColor="#FFFFFF" />-->
-
-    <!--</RelativeLayout>-->
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/design_bottom_sheet"
         android:layout_width="wrap_content"
@@ -176,7 +154,11 @@
         app:layout_behavior="@string/bottom_sheet_behavior"
         tools:context="pl.zpi.museumguide.Room">
 
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@android:color/black"
+            android:id="@+id/view_toolbar" />
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -192,6 +174,7 @@
                 android:layout_marginTop="15dp"
                 android:textAlignment="center"
                 android:textSize="14sp"
+                android:maxLines="1"
                 android:textColor="@color/colorPrimaryDark"/>
         </android.support.v7.widget.Toolbar>
 
