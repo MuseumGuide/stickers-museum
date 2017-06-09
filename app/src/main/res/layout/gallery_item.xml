@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
 
     <ImageView
         android:id="@+id/galleryPhoto"
@@ -10,12 +11,11 @@
         android:layout_height="200dp"
         app:srcCompat="@drawable/gui_artist_icon" />
 
-    <TextView
+    <pl.zpi.museumguide.CustomFontTextView
         android:id="@+id/galleryText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textSize="13sp" />
 </LinearLayout>

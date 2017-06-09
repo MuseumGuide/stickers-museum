@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--background-->
-    <color name="colorPrimary">#d3d4d9</color>
+    <color name="colorPrimary">#fcfcfc</color>
+    <color name="colorPrimarySecond">#f7f4f4</color>
+    <color name="colorForLines">#e8e5e5</color>
     <!--elements background and status bar-->
     <color name="colorPrimaryDark">#252627</color>
     <!--warning elements-->
     <color name="colorWarning">#e93143</color>
-    <color name="colorAccent">#4bbba2</color>
+    <color name="colorAccent">#a3ccd6</color>
+    <!-- <color name="colorAccent">#4bbba2</color> -->
     <!--light text-->
-    <color name="colorLight">#fff9fb</color>
+    <color name="colorLight">#232323</color>
 </resources>

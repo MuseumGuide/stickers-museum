@@ -1,5 +1,6 @@
 package pl.zpi.museumguide;
 
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -61,6 +62,7 @@ public class Room extends AppCompatActivity
     private TabLayout tabLayout;
     private Toolbar toolbar;
     private boolean switchingRoom;
+    private Typeface tf1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -271,12 +273,12 @@ public class Room extends AppCompatActivity
         if(behavior.getState() == BottomSheetBehavior.STATE_COLLAPSED)
         {
             TextView title = (TextView) findViewById(R.id.MapWorkTitle);
-            title.setText(work.getTitle());
+            title.setText(work.getTitle().toUpperCase());
             title.setGravity(Gravity.LEFT);
             if(title.getPaint().measureText(title.getText().toString()) > title.getWidth())
-                title.setTextSize(7);
+                title.setTextSize(12);
             else
-                title.setTextSize(14);
+                title.setTextSize(16);
             setWorkInfoFragment(work);
             setAuthorInfoFragment(work);
             setGalleryFragment(work.getAuthor());

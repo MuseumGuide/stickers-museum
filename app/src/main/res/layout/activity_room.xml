@@ -22,12 +22,12 @@
             <FrameLayout
                 android:id="@+id/background_room"
                 android:layout_width="match_parent"
-                android:layout_height="600dp"
+                android:layout_height="match_parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:background="#a3ccd6">
+                android:background="@color/colorAccent">
 
                 <ViewFlipper
                     android:id="@+id/flipper"
@@ -143,7 +143,7 @@
         android:id="@+id/design_bottom_sheet"
         android:layout_width="wrap_content"
         android:layout_height="618dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimarySecond"
         android:orientation="vertical"
 
 
@@ -157,8 +157,9 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@android:color/black"
+            android:background="@color/colorForLines"
             android:id="@+id/view_toolbar" />
+
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -167,22 +168,35 @@
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme">
 
-            <TextView
+            <pl.zpi.museumguide.CustomFontTextView
                 android:id="@+id/MapWorkTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:fontFamily="@+font/Sitka"
                 android:layout_marginTop="15dp"
                 android:textAlignment="center"
-                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textSize="16sp"
                 android:maxLines="1"
                 android:textColor="@color/colorPrimaryDark"/>
         </android.support.v7.widget.Toolbar>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorForLines"
+            android:id="@+id/view_up_tabs" />
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorForLines"
+            android:id="@+id/view_down_tabs" />
 
         <android.support.v4.view.ViewPager
             android:id="@+id/container"
