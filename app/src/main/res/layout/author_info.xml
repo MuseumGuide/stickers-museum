@@ -13,48 +13,60 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <pl.zpi.museumguide.CustomFontTextView
-            android:id="@+id/authorNameFrag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="23dp"
-            android:textStyle="bold"
-            android:text="Informacje o autorze"
-            android:textSize="16sp" />
+            <pl.zpi.museumguide.CustomFontTextView
+                android:id="@+id/authorNameFrag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="23dp"
+                android:text="Informacje o autorze"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-        <ImageView
-            android:id="@+id/authorImageFrag"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:layout_marginTop="20dp"
-            app:srcCompat="@drawable/logo"
-            android:layout_below="@+id/authorNameFrag"
-            android:layout_centerHorizontal="true" />
+            <ImageView
+                android:id="@+id/authorImageFrag"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_below="@+id/authorNameFrag"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/logo" />
 
-        <pl.zpi.museumguide.CustomFontTextView
-            android:id="@+id/authorInfoFrag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/authorImageFrag"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="19dp"
-            android:text="Prace artysty"
-            android:textStyle="bold"
-            android:textSize="16sp" />
+            <pl.zpi.museumguide.CustomFontTextView
+                android:id="@+id/authorInfoFrag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/authorImageFrag"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="19dp"
+                android:text="Informacje o artyście"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-        <pl.zpi.museumguide.CustomFontTextView
-            android:id="@+id/authorWorks"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/authorInfoFrag"
-            android:lineSpacingExtra="7dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginTop="28dp"
-            android:text="TextView"
-            android:textSize="13sp" />
+            <pl.zpi.museumguide.CustomFontTextView
+                android:id="@+id/authorInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/authorInfoFrag"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="28dp"
+                android:lineSpacingExtra="7dp"
+                android:textSize="13sp" />
+
+            <!---->
+            <!--android:layout_marginTop="28dp"-->
+            <!--<pl.zpi.museumguide.CustomFontTextView-->
+                <!--android:id="@+id/authorWorks"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_below="@+id/authorInfoFrag"-->
+                <!--android:layout_marginLeft="25dp"-->
+                <!--android:layout_alignEnd="@id/authorWorks"-->
+                <!--android:lineSpacingExtra="7dp"-->
+                <!--android:textSize="13sp" />-->
 
         </RelativeLayout>
 

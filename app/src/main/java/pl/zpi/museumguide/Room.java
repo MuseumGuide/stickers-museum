@@ -286,13 +286,15 @@ public class Room extends AppCompatActivity {
 
         authorImage.setImageResource(work.getAuthor().getIdDrawable());
 
-        TextView authorWorks = (TextView) findViewById(R.id.authorWorks);
+        ((TextView) findViewById(R.id.authorInfo)).setText(work.getAuthor().getDescription());
 
-        String out_authorWorks = "";
-        for (Work obj : work.getAuthor().getWorks())
-            out_authorWorks += "-  " + obj.getTitle() + "\n";
-
-        authorWorks.setText(out_authorWorks);
+//        TextView authorWorks = (TextView) findViewById(R.id.authorWorks);
+//
+//        String out_authorWorks = "";
+//        for (Work obj : work.getAuthor().getWorks())
+//            out_authorWorks += "-  " + obj.getTitle() + "\n";
+//
+//        authorWorks.setText(out_authorWorks);
     }
 
     private void setWorkInfoFragment(Work work) {
