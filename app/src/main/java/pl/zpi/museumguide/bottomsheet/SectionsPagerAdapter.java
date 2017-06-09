@@ -19,14 +19,12 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        switch (position)
-        {
+        switch (position) {
             case 0:
                 return new WorkInfoFrag();
             case 1:
                 return new AuthorInfoFrag();
-            case 2:
-            {
+            case 2: {
                 gallery = new GalleryFrag();
                 return gallery;
             }
@@ -34,14 +32,17 @@ public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
         return null;
     }
 
-    public void setAuthor(Author auth)    {        gallery.setAuthor(auth);    }
+    public void setAuthor(Author auth) {
+        gallery.setAuthor(auth);
+    }
 
     @Override
-    public int getCount() { return 3;}
+    public int getCount() {
+        return 3;
+    }
 
     @Override
-    public CharSequence getPageTitle(int position)
-    {
+    public CharSequence getPageTitle(int position) {
         return null;
     }
 }

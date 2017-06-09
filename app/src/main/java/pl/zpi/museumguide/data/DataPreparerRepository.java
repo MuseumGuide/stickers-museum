@@ -111,7 +111,8 @@ public class DataPreparerRepository implements DataRepository {
 
 
         Work w1 = new Work();
-        w1.setTitle("Zimowy pejzaż z łyżwiarzami i pułapką na ptaki");
+//        w1.setTitle("Zimowy pejzaż z łyżwiarzami i pułapką na ptaki");
+        w1.setTitle("Zimowy pejzaż");
         w1.addContext(c1);
         w1.addContext(c2);
         w1.setDescription("Obraz przedstawia mieszkańców wioski ślizgających się i spacerujących po zamarzniętej rzece. Wokół panuje zimowa aura, drzewa są nagie, a na pierwszym planie widoczne są czarne wrony siedzące na gałęziach. Na małej przestrzeni malarz przedstawił gros szczegółów z zimowego pejzażu, a kolory i kształty");
@@ -174,7 +175,7 @@ public class DataPreparerRepository implements DataRepository {
     private void readProperties() throws IOException {
         Properties props=new Properties();
         InputStream inputStream =
-                this.getClass().getClassLoader().getResourceAsStream("application.properties");
+                this.getClass().getClassLoader().getResourceAsStream("assets/application.properties");
         props.load(inputStream);
 
         beaconUUIDs = new ArrayList<>();

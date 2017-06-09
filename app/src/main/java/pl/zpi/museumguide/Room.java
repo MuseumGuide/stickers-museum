@@ -79,8 +79,10 @@ public class Room extends AppCompatActivity {
         final Map<Beacon, Work> products = new HashMap<>();
 
         //todo resolve many works on one beacon
-        dataRepository.getAllBeacons()
-                .forEach(beacon -> products.put(beacon, beacon.getWork().get(0)));
+        for(Beacon beacon : dataRepository.getAllBeacons()) {
+            products.put(beacon, beacon.getWork().get(0));
+        }
+
 
         radarManager = new RadarManager(this, products);
 
