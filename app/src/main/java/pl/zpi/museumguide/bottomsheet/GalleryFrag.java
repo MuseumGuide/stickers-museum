@@ -39,9 +39,15 @@ public class GalleryFrag extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
+                Bundle bundle = new Bundle();
+
+                bundle.putInt("selected_img", i);
+
+
+
                 Fragment detailFragment = new DetailGalleryFrag();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-
+                detailFragment.setArguments(bundle);
                 transaction.replace(android.R.id.content,detailFragment);
                 transaction.addToBackStack(null);
 
