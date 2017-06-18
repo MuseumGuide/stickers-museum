@@ -1,6 +1,5 @@
 package pl.zpi.museumguide;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -18,7 +17,6 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -46,7 +44,6 @@ public class Room extends AppCompatActivity {
     private RadarManager radarManager;
 
     private Map<String, ImageView> pointsOnMap;
-    private ListView lv;
     private ImageView sticker1;
     private ImageView sticker2;
     private ImageView sticker3;
@@ -61,7 +58,6 @@ public class Room extends AppCompatActivity {
     private TabLayout tabLayout;
     private Toolbar toolbar;
     private boolean switchingRoom;
-    private Typeface tf1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,15 +75,11 @@ public class Room extends AppCompatActivity {
         final Map<Beacon, Work> products = new HashMap<>();
 
         //todo resolve many works on one beacon
-        for(Beacon beacon : dataRepository.getAllBeacons()) {
+        for (Beacon beacon : dataRepository.getAllBeacons()) {
             products.put(beacon, beacon.getWork().get(0));
         }
-
-
         radarManager = new RadarManager(this, products);
-
         flipper = (ViewFlipper) findViewById(R.id.flipper);
-
         lastOption = 0;
 
         radarManager.setListener(new RadarManager.Listener() {
@@ -258,7 +250,7 @@ public class Room extends AppCompatActivity {
             TextView title = (TextView) findViewById(R.id.MapWorkTitle);
             title.setText(work.getTitle().toUpperCase());
             title.setGravity(Gravity.LEFT);
-            if(title.getPaint().measureText(title.getText().toString()) > title.getWidth())
+            if (title.getPaint().measureText(title.getText().toString()) > title.getWidth())
                 title.setTextSize(12);
             else
                 title.setTextSize(16);
@@ -287,14 +279,6 @@ public class Room extends AppCompatActivity {
         authorImage.setImageResource(work.getAuthor().getIdDrawable());
 
         ((TextView) findViewById(R.id.authorInfo)).setText(work.getAuthor().getDescription());
-
-//        TextView authorWorks = (TextView) findViewById(R.id.authorWorks);
-//
-//        String out_authorWorks = "";
-//        for (Work obj : work.getAuthor().getWorks())
-//            out_authorWorks += "-  " + obj.getTitle() + "\n";
-//
-//        authorWorks.setText(out_authorWorks);
     }
 
     private void setWorkInfoFragment(Work work) {

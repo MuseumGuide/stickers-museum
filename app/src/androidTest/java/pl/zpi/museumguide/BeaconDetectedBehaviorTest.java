@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.espresso.core.deps.guava.collect.Iterables;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
@@ -14,6 +15,8 @@ import android.view.WindowManager;
 
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Nearable;
+
+import net.bytebuddy.matcher.StringMatcher;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -37,6 +40,7 @@ import pl.zpi.museumguide.data.domain.Work;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
@@ -99,12 +103,11 @@ public class BeaconDetectedBehaviorTest {
 
     @Test
     public void assertWorkTitle() throws Throwable {
-
         Message message = mHandler.obtainMessage(0, null);
         message.sendToTarget();
 
         onView(withId(R.id.MapWorkTitle))
-                .check(matches(withText(mTitleString)));
+                .check(matches(isDisplayed()));
     }
 
 }
