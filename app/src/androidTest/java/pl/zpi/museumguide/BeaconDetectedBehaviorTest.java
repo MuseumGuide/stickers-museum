@@ -39,6 +39,7 @@ import pl.zpi.museumguide.data.domain.Beacon;
 import pl.zpi.museumguide.data.domain.Work;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -107,7 +108,8 @@ public class BeaconDetectedBehaviorTest {
         message.sendToTarget();
 
         onView(withId(R.id.MapWorkTitle))
-                .check(matches(isDisplayed()));
+                .perform(click());
+                //.check(matches(isDisplayed()));
     }
 
 }
