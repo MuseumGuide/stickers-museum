@@ -1,27 +1,23 @@
 package pl.zpi.museumguide.bottomsheet;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 import pl.zpi.museumguide.R;
-import pl.zpi.museumguide.data.domain.Author;
+import pl.zpi.museumguide.data.DataPreparerRepository;
+
+import uk.co.senab.photoview.PhotoViewAttacher;
+
 
 
 public class DetailGalleryFrag extends Fragment {
 
-    //private OnFragmentInteractionListener mListener;
-
-    public DetailGalleryFrag() {
-        // Required empty public constructor
-    }
+    public DetailGalleryFrag() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,24 +30,11 @@ public class DetailGalleryFrag extends Fragment {
 
         Bundle bundle = getArguments();
 
-        int position = bundle.getInt("selected_image");
+        int position = bundle.getInt("selected_img");
 
-        imageView.setImageResource(R.drawable.data_glowa);
-        //imageView.setImageResource(new ImageAdapter(getActivity().getApplicationContext()).getDrawable(position));
+        imageView.setImageResource(new DataPreparerRepository().getAllWorks().get(position).getIdDrawable());
+        PhotoViewAttacher photoAttacher = new PhotoViewAttacher(imageView);
 
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                FragmentManager fm = getActivity().getSupportFragmentManager();
-
-                if(fm.getBackStackEntryCount() > 0){
-                    fm.popBackStack();
-                }
-
-
-            }
-        });
         return view;
     }
 

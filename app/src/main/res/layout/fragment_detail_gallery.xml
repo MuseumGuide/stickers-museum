@@ -5,7 +5,6 @@
     tools:context="pl.zpi.museumguide.bottomsheet.DetailGalleryFrag"
     android:id="@+id/container">
 
-    <!-- TODO: Update blank fragment layout -->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

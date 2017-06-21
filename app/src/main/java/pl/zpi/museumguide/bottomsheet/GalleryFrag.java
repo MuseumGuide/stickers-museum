@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-
 import pl.zpi.museumguide.R;
 import pl.zpi.museumguide.data.domain.Author;
 
@@ -40,10 +39,7 @@ public class GalleryFrag extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 Bundle bundle = new Bundle();
-
                 bundle.putInt("selected_img", i);
-
-
 
                 Fragment detailFragment = new DetailGalleryFrag();
                 FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
@@ -54,7 +50,6 @@ public class GalleryFrag extends Fragment {
                 transaction.commit();
             }
         });
-
         return view;
     }
 }
