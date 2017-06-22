@@ -1,6 +1,5 @@
 package pl.zpi.museumguide;
 
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -18,7 +17,6 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
@@ -38,8 +36,7 @@ import pl.zpi.museumguide.data.domain.Beacon;
 import pl.zpi.museumguide.data.domain.Work;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
-public class Room extends AppCompatActivity
-{
+public class Room extends AppCompatActivity {
 
     private static final String TAG = "Room";
 
@@ -47,7 +44,6 @@ public class Room extends AppCompatActivity
     private RadarManager radarManager;
 
     private Map<String, ImageView> pointsOnMap;
-    private ListView lv;
     private ImageView sticker1;
     private ImageView sticker2;
     private ImageView sticker3;
@@ -62,11 +58,9 @@ public class Room extends AppCompatActivity
     private TabLayout tabLayout;
     private Toolbar toolbar;
     private boolean switchingRoom;
-    private Typeface tf1;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_room);
 
@@ -78,34 +72,26 @@ public class Room extends AppCompatActivity
         background.setBackgroundResource(R.drawable.gui_map);
 
         dataRepository = new DataPreparerRepository();
-        Map<Beacon, Work> products = new HashMap<>();
-
-        //todo get from repository
-        Beacon b1 = dataRepository.getBeacon(DataPreparerRepository.beacon1UUID);
-        Beacon b2 = dataRepository.getBeacon(DataPreparerRepository.beacon2UUID);
+        final Map<Beacon, Work> products = new HashMap<>();
 
         //todo resolve many works on one beacon
-        products.put(b1, b1.getWork().get(0));
-        products.put(b2, b2.getWork().get(0));
+        for (Beacon beacon : dataRepository.getAllBeacons()) {
+            products.put(beacon, beacon.getWork().get(0));
+        }
         radarManager = new RadarManager(this, products);
-
         flipper = (ViewFlipper) findViewById(R.id.flipper);
-
         lastOption = 0;
 
         radarManager.setListener(new RadarManager.Listener() {
             @Override
-            public void onProductPickup(Work work, List<String> allStickers)
-            {
+            public void onProductPickup(Work work, List<String> allStickers) {
                 //todo work out function to choose right room
-                switch(work.getBeacon().getRoom())
-                {
+                switch (work.getBeacon().getRoom()) {
                     case 1:
-                        if(!switchingRoom)
+                        if (!switchingRoom)
                             createFlipperAnimation(1, false);
 
-                        if(lastOption != 1)
-                        {
+                        if (lastOption != 1) {
                             flipper.setDisplayedChild(1);
                             lastOption = 1;
                         }
@@ -130,11 +116,10 @@ public class Room extends AppCompatActivity
                         break;
 
                     case 2:
-                        if(!switchingRoom)
+                        if (!switchingRoom)
                             createFlipperAnimation(2, false);
 
-                        if(lastOption != 2)
-                        {
+                        if (lastOption != 2) {
                             flipper.setDisplayedChild(2);
                             lastOption = 2;
                         }
@@ -160,16 +145,14 @@ public class Room extends AppCompatActivity
             }
 
             @Override
-            public void onProductPutdown(Work work)
-            {
+            public void onProductPutdown(Work work) {
 
             }
         });
         prepareTabLayout();
     }
 
-    private void setNearSticker(Work work)
-    {
+    private void setNearSticker(Work work) {
         sticker1.setImageResource(R.drawable.gui_sticker);
         sticker2.setImageResource(R.drawable.gui_sticker);
         sticker3.setImageResource(R.drawable.gui_sticker);
@@ -180,23 +163,19 @@ public class Room extends AppCompatActivity
         near.setImageResource(R.drawable.gui_sticker_hover);
     }
 
-    private void savePointsOnMap(Work work, ImageView[] iv_stickers)
-    {
+    private void savePointsOnMap(Work work, ImageView[] iv_stickers) {
         pointsOnMap = new HashMap<>();
 
         int amountAdded = 0;
-        for(Beacon b : dataRepository.getAllBeacons())
-        {
-            if(b.getRoom() == work.getBeacon().getRoom() && amountAdded < amountStickersInRooms[work.getBeacon().getRoom() - 1])
-            {
+        for (Beacon b : dataRepository.getAllBeacons()) {
+            if (b.getRoom() == work.getBeacon().getRoom() && amountAdded < amountStickersInRooms[work.getBeacon().getRoom() - 1]) {
                 pointsOnMap.put(b.getUuid(), iv_stickers[amountAdded]);
                 amountAdded++;
             }
         }
     }
 
-    private void createFlipperAnimation(int option, boolean isRoom)
-    {
+    private void createFlipperAnimation(int option, boolean isRoom) {
         Animation fadeIn = new AlphaAnimation(0, 1);
         fadeIn.setInterpolator(new DecelerateInterpolator());
         fadeIn.setStartOffset(1000);
@@ -209,10 +188,8 @@ public class Room extends AppCompatActivity
 
         Animation zoom;
 
-        if(!isRoom)
-        {
-            switch (option)
-            {
+        if (!isRoom) {
+            switch (option) {
                 case 1:
                     zoom = AnimationUtils.loadAnimation(this, R.anim.zoom1);
                     zoom.setDuration(2100);
@@ -227,14 +204,13 @@ public class Room extends AppCompatActivity
             }
         }
 
-        if(isRoom)
+        if (isRoom)
             flipper.setOutAnimation(fadeOut);
 
         flipper.setInAnimation(fadeIn);
     }
 
-    private void prepareTabLayout()
-    {
+    private void prepareTabLayout() {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.bottom_arrow_up);
@@ -250,32 +226,31 @@ public class Room extends AppCompatActivity
         tabLayout.getTabAt(2).setIcon(R.drawable.gui_gallery_icon);
     }
 
-    public void showNotice(Work work)
-    {
+    public void showNotice(Work work) {
         View bottomSheet = findViewById(R.id.design_bottom_sheet);
 
         final BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
         behavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
             public void onStateChanged(@NonNull View bottomSheet, int newState) {
-                if(newState == BottomSheetBehavior.STATE_EXPANDED && toolbar != null)
+                if (newState == BottomSheetBehavior.STATE_EXPANDED && toolbar != null)
                     toolbar.setNavigationIcon(R.drawable.bottom_arrow_down);
-                if(newState == BottomSheetBehavior.STATE_COLLAPSED)
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED)
                     toolbar.setNavigationIcon(R.drawable.bottom_arrow_up);
             }
+
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
 
             }
         });
-        if(behavior.getState() == BottomSheetBehavior.STATE_HIDDEN)
+        if (behavior.getState() == BottomSheetBehavior.STATE_HIDDEN)
             behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        if(behavior.getState() == BottomSheetBehavior.STATE_COLLAPSED)
-        {
+        if (behavior.getState() == BottomSheetBehavior.STATE_COLLAPSED) {
             TextView title = (TextView) findViewById(R.id.MapWorkTitle);
             title.setText(work.getTitle().toUpperCase());
             title.setGravity(Gravity.LEFT);
-            if(title.getPaint().measureText(title.getText().toString()) > title.getWidth())
+            if (title.getPaint().measureText(title.getText().toString()) > title.getWidth())
                 title.setTextSize(12);
             else
                 title.setTextSize(16);
@@ -288,15 +263,13 @@ public class Room extends AppCompatActivity
 
     }
 
-    private void setGalleryFragment(Author auth)
-    {
+    private void setGalleryFragment(Author auth) {
         mSectionsPagerAdapter.setAuthor(auth);
         GridView grid = (GridView) findViewById(R.id.gridView);
         grid.invalidateViews();
     }
 
-    private void setAuthorInfoFragment(Work work)
-    {
+    private void setAuthorInfoFragment(Work work) {
         TextView authorName = (TextView) findViewById(R.id.authorNameFrag);
         Author author = work.getAuthor();
         authorName.setText(author.getFirstname() + " " + author.getLastname());
@@ -305,17 +278,10 @@ public class Room extends AppCompatActivity
 
         authorImage.setImageResource(work.getAuthor().getIdDrawable());
 
-        TextView authorWorks = (TextView) findViewById(R.id.authorWorks);
-
-        String out_authorWorks = "";
-        for(Work obj : work.getAuthor().getWorks())
-            out_authorWorks += "-  " + obj.getTitle() + "\n";
-
-        authorWorks.setText(out_authorWorks);
+        ((TextView) findViewById(R.id.authorInfo)).setText(work.getAuthor().getDescription());
     }
 
-    private void setWorkInfoFragment(Work work)
-    {
+    private void setWorkInfoFragment(Work work) {
         TextView description = (TextView) findViewById(R.id.workDescriptionFragment);
         description.setText(work.getDescription());
 
@@ -329,8 +295,7 @@ public class Room extends AppCompatActivity
         PhotoViewAttacher photoAttacher = new PhotoViewAttacher(workImage);
     }
 
-    public RadarManager getRadarManager()
-    {
+    public RadarManager getRadarManager() {
         return radarManager;
     }
 

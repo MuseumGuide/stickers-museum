@@ -1,9 +1,12 @@
 package pl.zpi.museumguide.data;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Properties;
 
 import pl.zpi.museumguide.R;
 import pl.zpi.museumguide.data.domain.Author;
@@ -24,19 +27,21 @@ public class DataPreparerRepository implements DataRepository {
 
     List<Work> works;
     List<Beacon> beacons;
-    public static final String beacon1UUID = "9d52d31fa9e0f214";
+//    public static final String beacon1UUID = "4810b7186752df3a";
 
     // UUID Mati 1 "9d52d31fa9e0f214"
     // UUID Mario 1 "4810b7186752df3a"
     // UUID Bed "04fa06a3e84db44d"
     // UUID Szaudi 1 "666f96ab72f221ac"
 
-    public static final String beacon2UUID = "c0e0ce88435105aa";
+//    public static final String beacon2UUID = "3804f0fbfdafcc37";
 
     // UUID Mati 2 "c0e0ce88435105aa"
     // UUID Mario 2 "3804f0fbfdafcc37"
     // UUID Door_blue "3b3101cd591facae"
     // UUID Szaudi 2 "3895f793dfc8c681"
+
+    private List<String> beaconUUIDs;
 
     public DataPreparerRepository() {
         works = new ArrayList<>();
@@ -45,6 +50,12 @@ public class DataPreparerRepository implements DataRepository {
     }
 
     private void prepareData() {
+        try {
+            readProperties();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         Period p1 = new Period();
         p1.setCentury(17);
 
@@ -83,16 +94,25 @@ public class DataPreparerRepository implements DataRepository {
         m2.setType(MaterialType.PAINT);
 
         Beacon b1 = new Beacon();
-        b1.setUuid(beacon1UUID);
+        b1.setUuid(beaconUUIDs.get(0));
         b1.setRoom(1);
 
         Beacon b2 = new Beacon();
-        b2.setUuid(beacon2UUID);
-        b2.setRoom(2);
+        b2.setUuid(beaconUUIDs.get(1));
+        b2.setRoom(1);
+
+        Beacon b3 = new Beacon();
+        b3.setUuid(beaconUUIDs.get(2));
+        b3.setRoom(2);
+
+        Beacon b4 = new Beacon();
+        b4.setUuid(beaconUUIDs.get(3));
+        b4.setRoom(2);
 
 
         Work w1 = new Work();
-        w1.setTitle("Zimowy pejzaż z łyżwiarzami i pułapką na ptaki");
+//        w1.setTitle("Zimowy pejzaż z łyżwiarzami i pułapką na ptaki");
+        w1.setTitle("Zimowy pejzaż");
         w1.addContext(c1);
         w1.addContext(c2);
         w1.setDescription("Obraz przedstawia mieszkańców wioski ślizgających się i spacerujących po zamarzniętej rzece. Wokół panuje zimowa aura, drzewa są nagie, a na pierwszym planie widoczne są czarne wrony siedzące na gałęziach. Na małej przestrzeni malarz przedstawił gros szczegółów z zimowego pejzażu, a kolory i kształty");
@@ -123,25 +143,47 @@ public class DataPreparerRepository implements DataRepository {
         w3.setTitle("Przysłowia niderlandzkie");
         w3.setDescription("Jest to obraz olejny na desce o wymiarach 117 × 163 cm, przedstawiający wiejski krajobraz, w który wpisane są liczne grupy postaci i przedmioty, tworzące oddzielne wątki rodzajowe. Na pierwszym planie widoczne jest rozległe podwórze, przy którym stoi wielka chałupa, pręgierz i stara szopa. Drugi plan tworzy ceglana wieża z przybudówkami i drewniana stajnia. Pomiędzy nimi płynie rzeka tworząca dolinę, zaś w oddali widać ujście rzeki do morza, na którym płynie rybacki statek z żaglem. Kompozycja obrazu oparta jest na osi, która prowadzi z przodu po lewej stronie do tyłu po prawej ku morzu. ");
         w3.setAuthor(a1);
+        w3.setBeacon(b3);
         w3.addMaterial(m1);
         w3.addMaterial(m2);
         w3.setType(WorkType.PAINTING);
         w3.setIdDrawable(R.drawable.data_przyslowia);
 
+        b3.addWork(w3);
+
         Work w4 = new Work();
         w4.setTitle("Triumf śmierci");
         w4.setDescription("Obraz przedstawia bardzo ponurą scenerię, która budzi skojarzenia z trwającą bitwą. Jednak owa bitwa nie rozgrywa się między samymi ludźmi a między armią umarłych, która nieuchronnie odbiera życie wszystkim ludziom. Malarz położył duży nacisk na ukazanie bezsilności wobec śmierci, na płótnie zaprezentował ludzi z różnych środowisk społecznych – od chłopów i żołnierzy do szlachty, a nawet króla i kardynała - karanych przez śmierć bez wyjątku, którzy w obliczu śmierci stają na równi z innymi.");
         w4.setAuthor(a1);
+        w4.setBeacon(b4);
         w4.addMaterial(m1);
         w4.addMaterial(m2);
         w4.setType(WorkType.PAINTING);
         w4.setIdDrawable(R.drawable.data_smierc);
+
+        b4.addWork(w4);
 
         Collections.addAll(a1.getWorks(), w1, w2, w3, w4);
         Collections.addAll(works, w1, w2, w3, w4);
 
         beacons.add(b1);
         beacons.add(b2);
+        beacons.add(b3);
+        beacons.add(b4);
+    }
+
+    private void readProperties() throws IOException {
+        Properties props=new Properties();
+        InputStream inputStream =
+                this.getClass().getClassLoader().getResourceAsStream("assets/application.properties");
+        props.load(inputStream);
+
+        beaconUUIDs = new ArrayList<>();
+        beaconUUIDs.add(props.getProperty("beacon1"));
+        beaconUUIDs.add(props.getProperty("beacon2"));
+        beaconUUIDs.add(props.getProperty("beacon3"));
+        beaconUUIDs.add(props.getProperty("beacon4"));
+
     }
 
     @Override
