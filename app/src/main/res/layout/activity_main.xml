@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
@@ -10,44 +11,81 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="pl.zpi.museumguide.MainActivity">
 
-    <TextView
-        android:id="@+id/titleLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:text="SZUKAMY BIKONOW"
-        android:textAlignment="center"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/authorLabel"
+    <ImageView
+        android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        android:layout_below="@+id/titleLabel"
+        app:srcCompat="@drawable/theme"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
 
-    <ListView
-        android:id="@+id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/authorLabel"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="89dp" />
-
-    <Button
-        android:id="@+id/goToMap"
+    <ImageButton
+        android:id="@+id/settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="66dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/menu_settings"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="19dp"
-        android:onClick="goToMap"
-        android:text="Mapa" />
+        android:layout_alignParentStart="true" />
 
+    <TextView
+        android:id="@+id/settings_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/info_text"
+        android:layout_alignBottom="@+id/info_text"
+        android:layout_alignEnd="@+id/settings"
+        android:layout_alignParentStart="true"
+        android:ems="10"
+        android:paddingTop="15px"
+        android:text="@string/menu_settings"
+        android:textAlignment="center"
+        android:textColor="@color/colorForLines"
+        android:textSize="10sp" />
+
+    <ImageButton
+        android:id="@+id/info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/menu_info"
+        android:layout_alignTop="@+id/settings"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/info_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:paddingTop="15px"
+        android:text="@string/menu_info"
+        android:textAlignment="center"
+        android:textColor="@color/colorForLines"
+        android:textSize="10sp" />
+
+    <ImageButton
+        android:id="@+id/map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/settings"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/menu_map_pin" />
+
+    <TextView
+        android:id="@+id/map_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/map"
+        android:layout_below="@+id/map"
+        android:ems="10"
+        android:paddingTop="15px"
+        android:text="@string/menu_map"
+        android:textAlignment="center"
+        android:textColor="@color/colorForLines"
+        android:textSize="10sp" />
 </RelativeLayout>
