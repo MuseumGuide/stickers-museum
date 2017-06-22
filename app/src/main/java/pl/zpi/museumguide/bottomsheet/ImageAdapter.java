@@ -59,10 +59,7 @@ public class ImageAdapter extends BaseAdapter {
             image = (ImageView) itemView.findViewById(R.id.galleryPhoto);
             text.setText(work.getTitle());
             image.setImageResource(work.getIdDrawable());
-
-
         }
-
         return itemView;
     }
 }

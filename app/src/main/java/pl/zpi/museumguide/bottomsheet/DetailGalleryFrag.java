@@ -37,10 +37,5 @@ public class DetailGalleryFrag extends Fragment {
 
         return view;
     }
-
-
-
-
-
 }
 
