@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+
+    <ImageView
+        android:id="@+id/map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginRight="@dimen/activity_vertical_margin"
+        android:adjustViewBounds="true"
+        android:cropToPadding="false"
+        app:srcCompat="@drawable/museum_localizaton"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/map"
+        android:layout_marginBottom="35dp"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:text="Powstańców Warszawy 5" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/map"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:text="48-300 Wrocław" />
+
+    <TextView
+        android:id="@+id/contact_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/map"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:layout_marginTop="16dp"
+        android:layout_toEndOf="@+id/textView"
+        android:text="Kontakt:"
+        android:textColor="@color/colorForLines"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/hours_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Godziny otwarcia"
+        android:textColor="@color/colorForLines"
+        android:textSize="18sp"
+        android:layout_alignStart="@id/map"
+        android:layout_above="@+id/phone"
+         />
+
+    <TextView
+        android:id="@+id/web"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contact_text"
+        android:layout_alignStart="@id/contact_text"
+        android:layout_marginTop="40dp"
+        android:text="mnwr.art.pl"
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/contact_text"
+        android:layout_alignStart="@id/contact_text"
+        android:layout_marginTop="10dp"
+        android:text="71 343 56 43"
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="piątek 10:00–17:00\nsobota 10:30–18:00\nniedziela 10:30–18:00\nponiedziałek Zamknięte\nwtorek 10:00–17:00\nśroda 10:00–17:00\nczwartek 10:00–17:00\n"
+        android:textSize="14sp"
+        android:layout_below="@id/hours_text"
+        android:layout_marginTop="10dp"
+        android:layout_alignStart="@+id/hours_text" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/map"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="@dimen/activity_vertical_margin"
+        android:text="Adres:"
+        android:textColor="@color/colorForLines"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:maxHeight="150px"
+        app:srcCompat="@drawable/logo"
+        android:layout_alignParentTop="true"
+        android:layout_alignEnd="@+id/map"
+        android:layout_marginTop="15dp" />
+
+</RelativeLayout>

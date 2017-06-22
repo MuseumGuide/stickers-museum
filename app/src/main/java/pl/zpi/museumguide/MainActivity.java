@@ -22,5 +22,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(context, Room.class));
             }
         });
+
+        //set listeners
+        findViewById(R.id.info).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context, InfoActivity.class));
+            }
+        });
     }
 }
