@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.support.test.espresso.IdlingResource;
+import android.support.test.espresso.NoMatchingViewException;
+import android.support.test.espresso.ViewAssertion;
+import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.assertion.ViewAssertions;
 import android.support.test.espresso.core.deps.guava.collect.Iterables;
 import android.support.test.filters.LargeTest;
@@ -11,10 +15,13 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.runner.lifecycle.ActivityLifecycleMonitorRegistry;
 import android.support.test.runner.lifecycle.Stage;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.estimote.sdk.BeaconManager;
 import com.estimote.sdk.Nearable;
+
+import junit.framework.AssertionFailedError;
 
 import net.bytebuddy.matcher.StringMatcher;
 
@@ -39,6 +46,8 @@ import pl.zpi.museumguide.data.domain.Beacon;
 import pl.zpi.museumguide.data.domain.Work;
 
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.Espresso.registerIdlingResources;
+import static android.support.test.espresso.Espresso.unregisterIdlingResources;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -107,9 +116,83 @@ public class BeaconDetectedBehaviorTest {
         Message message = mHandler.obtainMessage(0, null);
         message.sendToTarget();
 
-        onView(withId(R.id.MapWorkTitle))
-                .perform(click());
-                //.check(matches(isDisplayed()));
+        waitFor(
+                onView(withId(R.id.MapWorkTitle)),
+                matches(isDisplayed()),
+                5000
+        );
     }
 
+
+    private void waitFor(ViewInteraction viewInteraction, ViewAssertion viewAssertion, long timeout) {
+
+        PollingTimeoutIdler idler = new PollingTimeoutIdler(viewInteraction, viewAssertion, timeout);
+        registerIdlingResources(idler);
+
+        viewInteraction.check(viewAssertion);
+
+        unregisterIdlingResources(idler);
+    }
+
+
+
+    private class PollingTimeoutIdler implements IdlingResource {
+
+        private final ViewAssertion mViewAssertion;
+        private final long mTimeout;
+        private final long mStartTime;
+        private ResourceCallback mCallback;
+        private volatile View mTestView;
+
+        public PollingTimeoutIdler(ViewInteraction viewInteraction, ViewAssertion viewAssertion, long timeout) {
+            mViewAssertion = viewAssertion;
+            mTimeout = timeout;
+            mStartTime = System.currentTimeMillis();
+
+            viewInteraction.check(new ViewAssertion() {
+                @Override
+                public void check(View view, NoMatchingViewException noViewFoundException) {
+                    mTestView = view;
+                }
+            });
+        }
+
+        @Override
+        public String getName() {
+            return getClass().getSimpleName();
+        }
+
+        @Override
+        public boolean isIdleNow() {
+
+            long elapsed = System.currentTimeMillis() - mStartTime;
+            boolean timedOut = elapsed >= mTimeout;
+
+            boolean idle = testView() || timedOut;
+            if (idle) {
+                mCallback.onTransitionToIdle();
+            }
+
+            return idle;
+        }
+
+        private boolean testView() {
+
+            if (mTestView != null) {
+                try {
+                    mViewAssertion.check(mTestView, null);
+                    return true;
+                } catch (AssertionFailedError ex) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public void registerIdleTransitionCallback(ResourceCallback callback) {
+            mCallback = callback;
+        }
+    }
 }
