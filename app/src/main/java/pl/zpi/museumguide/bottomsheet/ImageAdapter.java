@@ -1,7 +1,6 @@
 package pl.zpi.museumguide.bottomsheet;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +60,6 @@ public class ImageAdapter extends BaseAdapter {
             text.setText(work.getTitle());
             image.setImageResource(work.getIdDrawable());
         }
-
         return itemView;
     }
 }
