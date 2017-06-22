@@ -3,7 +3,7 @@
     <!--background-->
     <color name="colorPrimary">#fcfcfc</color>
     <color name="colorPrimarySecond">#f7f4f4</color>
-    <color name="colorForLines">#e8e5e5</color>
+    <color name="colorForLines">#a2a2a2</color>
     <!--elements background and status bar-->
     <color name="colorPrimaryDark">#252627</color>
     <!--warning elements-->
